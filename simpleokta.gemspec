@@ -6,16 +6,16 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Braden Shipley"]
   spec.email         = ["simpleokta@gmail.com"]
 
-  spec.summary       = "a simple okta gem"
-  spec.description   = "a simple okta gem"
-  spec.homepage      = "http://example.com"
+  spec.summary       = "A Simple Okta Gem that helps perform common Okta Calls."
+  spec.description   = "A Simple Okta Gem that helps perform common Okta Calls."
+  spec.homepage      = "https://github.com/bradenshipley/simpleokta"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
 
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/bradenshipley/simpleokta`"
+  spec.metadata["source_code_uri"] = "https://github.com/bradenshipley/simpleokta"
   spec.metadata["changelog_uri"] = "https://github.com/bradenshipley/simpleokta/changelog.md"
 
   # Specify which files should be added to the gem when it is released.
