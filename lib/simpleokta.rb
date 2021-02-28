@@ -22,7 +22,7 @@ module Simpleokta
   end
 
 
-  class Okta
+  class Util
     require 'faraday'
     require 'json'
     require 'erb'
@@ -79,6 +79,11 @@ module Simpleokta
       JSON.parse(response.body)
     end
 
+    def groups
+      response = call_with_token('get', GROUP_API_BASE_PATH)
+      JSON.parse(response.body)
+    end
+
     def logs(time_range:, event:)
       pass
     end
@@ -93,7 +98,7 @@ module Simpleokta
       JSON.parse(response.body)
     end
 
-    def user(login:)
+    def user_from_login(login)
       response = call_with_token('get', "#{USER_API_BASE_PATH}/#{ERB::Util.url_encode(login)}")
       JSON.parse(response.body)
     end
