@@ -22,7 +22,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+config = Simpleokta::Configuration.new
+config.api_token = "API Token goes here. We'll pass it into the Authorization header for you"
+config.base_api_url = "https://myoktaorgurl.okta.com"
+@okta_util = Simpleokta::Util.new(config)
+```
+
 
 ## Development
 

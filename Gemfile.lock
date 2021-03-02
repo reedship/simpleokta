@@ -51,6 +51,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
+    yard (0.9.26)
 
 PLATFORMS
   ruby
@@ -62,6 +63,7 @@ DEPENDENCIES
   rest-client
   rspec (~> 3.0)
   simpleokta!
+  yard
 
 BUNDLED WITH
-   2.1.4
+   2.2.12
