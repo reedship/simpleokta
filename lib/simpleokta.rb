@@ -6,21 +6,22 @@ require "faraday"
 module Simpleokta
   class Error < StandardError; end
 
-  class << self
-    attr_accessor :configuration
 
-    def self.configuration
-      @configuration ||= Configuration.new
-    end
+  extend self
+  attr_accessor :configuration
 
-    def self.reset
-      @configuration = Configuration.new
-    end
-
-    def self.configure
-      yield(configuration)
-    end
+  def self.configuration
+    @configuration ||= Configuration.new
   end
+
+  def self.reset
+    @configuration = Configuration.new
+  end
+
+  def self.configure
+    yield(configuration)
+  end
+
 
 
   class Util
@@ -36,11 +37,13 @@ module Simpleokta
     SYSTEM_LOG_API_BASE_PATH = "#{API_BASE_PATH}/logs"
     ORG_API_BASE_PATH = "#{API_BASE_PATH}/org"
 
+    attr_accessor :api_token, :base_api_url
+
     # Initialize using passed in config hash
     # @param config [Hash]
     def initialize(config)
-      @base_api_url = config.base_api_url
       @api_token = config.api_token
+      @base_api_url = config.base_api_url
     end
 
 
@@ -98,7 +101,7 @@ module Simpleokta
     # @see https://developer.okta.com/docs/reference/api/apps/#add-application Add application data.
     # @example
     #   Creating a Basic Auth App
-    #     {
+    #     app_data = {
     #       "name": "template_basic_auth",
     #       "label": "Sample Basic Auth App",
     #       "signOnMode": "BASIC_AUTH",

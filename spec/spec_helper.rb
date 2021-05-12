@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "simpleokta"
+require_relative "../lib/simpleokta.rb"
+require "vcr"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -12,10 +14,4 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.before(:all) do
-    Simpleokta.configure do |config|
-      config.api_token = ENV['API_TOKEN']
-      config.base_api_url = ENV['BASE_API_URL']
-    end
-  end
 end
