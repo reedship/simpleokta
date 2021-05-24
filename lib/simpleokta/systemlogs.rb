@@ -1,7 +1,6 @@
 module Simpleokta
   class Client
     module SystemLogs
-      include Constants
       # SYSTEM LOG METHODS
 
       # Return all system logs of a specific event, within a certain time range.

@@ -1,7 +1,6 @@
 module Simpleokta
   class Client
     module Apps
-      include Constants
       # APP METHODS
 
       # Returns a list of all applications in the okta instance.

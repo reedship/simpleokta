@@ -1,8 +1,6 @@
 module Simpleokta
   class Client
     module AuthServers
-      include Constants
-
       # AUTH SERVER METHODS
 
       # Return all Authorization Servers in the okta instance.

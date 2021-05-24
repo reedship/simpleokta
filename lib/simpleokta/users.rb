@@ -1,7 +1,6 @@
 module Simpleokta
   class Client
     module Users
-      include Constants
       # USER METHODS
 
       # Return all users in an okta instance

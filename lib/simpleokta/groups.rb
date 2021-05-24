@@ -1,7 +1,6 @@
 class Simpleokta
   class Client
     module Groups
-      include Constants
       # GROUP METHODS
 
       # Return all Groups in the okta instance.
