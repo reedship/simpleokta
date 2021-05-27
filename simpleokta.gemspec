@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   # Gem Dependencies
   spec.add_dependency("faraday", "~> 0.7.4")
-  spec.add_dependency("rack", ">= 1.6.0")
+  spec.add_dependency("rack")
 end
