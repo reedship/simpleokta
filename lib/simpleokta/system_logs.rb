@@ -12,7 +12,7 @@ module Simpleokta
       def logs(event, time_range)
         response = call_with_token(
           'get',
-          "#{SYSTEM_LOG_API_BASE_PATH}/logs?filter=eventType+eq+%22#{event}%22&since=#{time_range}"
+          "#{Constants::SYSTEM_LOG_API_BASE_PATH}/logs?filter=eventType+eq+%22#{event}%22&since=#{time_range}"
         )
         JSON.parse(response.body)
       end

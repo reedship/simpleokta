@@ -7,7 +7,7 @@ module Simpleokta
       # @return [Array<Application Object>]
       # @see https://developer.okta.com/docs/reference/api/apps/#application-object Application Object
       def apps
-        response = call_with_token('get', APP_API_BASE_PATH)
+        response = call_with_token('get', Constants::APP_API_BASE_PATH)
         JSON.parse(response.body)
       end
 
@@ -16,7 +16,7 @@ module Simpleokta
       # @return [Hash<Application Object>]
       # @see https://developer.okta.com/docs/reference/api/apps/#application-object Application Object
       def app(app_id)
-        response = call_with_token('get', "#{APP_API_BASE_PATH}/#{app_id}")
+        response = call_with_token('get', "#{Constants::APP_API_BASE_PATH}/#{app_id}")
         JSON.parse(response.body)
       end
 
@@ -25,7 +25,7 @@ module Simpleokta
       # @return [Array<User Object>]
       # @see https://developer.okta.com/docs/reference/api/apps/#application-user-object User Object
       def users_assigned_to_application(app_id)
-        response = call_with_token('get', "#{APP_API_BASE_PATH}/#{app_id}/users")
+        response = call_with_token('get', "#{Constants::APP_API_BASE_PATH}/#{app_id}/users")
         JSON.parse(response.body)
       end
 
@@ -48,7 +48,7 @@ module Simpleokta
       # @return [Hash<Application Object>]
       # @see https://developer.okta.com/docs/reference/api/apps/#application-object Application Object
       def create_app(app_data)
-        response = call_with_token('post', APP_API_BASE_PATH, app_data.to_json)
+        response = call_with_token('post', Constants::APP_API_BASE_PATH, app_data.to_json)
         JSON.parse(response.body)
       end
 
@@ -60,7 +60,7 @@ module Simpleokta
       # @see https://developer.okta.com/docs/reference/api/apps/#update-application Update Application
       # @see https://developer.okta.com/docs/reference/api/apps/#application-object Application Object
       def update_app(app_id, app_data)
-        response = call_with_token('put', "#{APP_API_BASE_PATH}/#{app_id}", app_data)
+        response = call_with_token('put', "#{Constants::APP_API_BASE_PATH}/#{app_id}", app_data)
         JSON.parse(response.body)
       end
 
@@ -68,7 +68,7 @@ module Simpleokta
       # @param app_id [String] the unique id of the application
       # @return {}
       def delete_app(app_id)
-        response = call_with_token('delete', "#{APP_API_BASE_PATH}/#{app_id}")
+        response = call_with_token('delete', "#{Constants::APP_API_BASE_PATH}/#{app_id}")
         JSON.parse(response.body)
       end
 
@@ -77,7 +77,7 @@ module Simpleokta
       # @see https://developer.okta.com/docs/reference/api/apps/#activate-application Activate Application
       # @return {}
       def activate_app(app_id)
-        response = call_with_token('post', "#{APP_API_BASE_PATH}/#{app_id}/lifecycle/activate")
+        response = call_with_token('post', "#{Constants::APP_API_BASE_PATH}/#{app_id}/lifecycle/activate")
         "Application with id: #{app_id} activated"
       end
 
@@ -86,7 +86,7 @@ module Simpleokta
       # @see https://developer.okta.com/docs/reference/api/apps/#deactivate-application Deactivate Application
       # @return {}
       def deactivate_app(app_id)
-        response = call_with_token('post', "#{APP_API_BASE_PATH}/#{app_id}/lifecycle/deactivate")
+        response = call_with_token('post', "#{Constants::APP_API_BASE_PATH}/#{app_id}/lifecycle/deactivate")
         "Application with id: #{app_id} deactivated"
       end
     end

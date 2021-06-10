@@ -30,18 +30,18 @@ RSpec.configure do |config|
     config.filter_sensitive_data('<<ACCESS_TOKEN>>') do
       fake_okta_api_token
     end
+    config.before_record do |i|
+      i.response.body.force_encoding('UTF-8')
+    end
   end
 
-  config.before_record do |i|
-    i.response.body.force_encoding('UTF-8')
-  end
 
 end
 
 
 module TestingClient
   extend RSpec::SharedContext
-  let(:client) { Simpleokta::Client.new(token: fake_okta_api_token, organization: 'test_org') }
+  let(:client) { Simpleokta::Client.new({:token => fake_okta_api_token, :base_api_url => ''}) }
 end
 
 RSpec.configure do |config|

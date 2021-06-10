@@ -1,4 +1,4 @@
-class Simpleokta
+module Simpleokta
   class Client
     module Groups
       # GROUP METHODS
@@ -7,7 +7,7 @@ class Simpleokta
       # @return [Array<Group Object>]
       # @see https://developer.okta.com/docs/reference/api/groups/#group-object Group Object
       def groups
-        response = call_with_token('get', GROUP_API_BASE_PATH)
+        response = call_with_token('get', Constants::GROUP_API_BASE_PATH)
         JSON.parse(response.body)
       end
 
@@ -16,7 +16,7 @@ class Simpleokta
       # @return [Array<Group Object>]
       # @see https://developer.okta.com/docs/reference/api/apps/#application-object Application Object
       def apps_assigned_to_group(group_id)
-        response = call_with_token('get', "#{APP_API_BASE_PATH}/?filter=group.id+eq+\"#{group_id}\"")
+        response = call_with_token('get', "#{Constants::APP_API_BASE_PATH}/?filter=group.id+eq+\"#{group_id}\"")
         JSON.parse(response.body)
       end
 
@@ -25,7 +25,7 @@ class Simpleokta
       # @param group_id [String] the unique identifier of the group
       # @return
       def assign_group_to_application(app_id, group_id)
-        response = call_with_token('put', "#{APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
+        response = call_with_token('put', "#{Constants::APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
         JSON.parse(response.body)
       end
 
@@ -36,7 +36,7 @@ class Simpleokta
       # @see https://developer.okta.com/docs/reference/api/apps/#response-example-34 Group Assignment Response
       # @see https://developer.okta.com/docs/reference/api/apps/#assign-group-to-application Assign Group To Application
       def remove_group_from_application(app_id, group_id)
-        response = call_with_token('delete', "#{APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
+        response = call_with_token('delete', "#{Constants::APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
         "Groud with id: #{group_id} has been removed from application with id: #{app_id}"
       end
 
@@ -46,7 +46,7 @@ class Simpleokta
       # @return [Group Assignment]
       # @see https://developer.okta.com/docs/reference/api/apps/#response-example-34 Group Assignment Response
       def get_assigned_group_for_application(app_id,group_id)
-        response = call_with_token('get', "#{APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
+        response = call_with_token('get', "#{Constants::APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
         JSON.parse(response.body)
       end
     end

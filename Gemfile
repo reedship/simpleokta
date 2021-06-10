@@ -6,6 +6,7 @@ gemspec
 gem "rake", "~> 12.0"
 gem "rspec", "~> 3.0"
 gem "faraday", "~> 0.7.4"
+gem "http"
 gem "breakers"
 gem "rest-client"
 gem "yard"

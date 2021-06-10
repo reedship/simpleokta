@@ -7,7 +7,7 @@ module Simpleokta
       # @return [Array<User>]
       # @see https://developer.okta.com/docs/reference/api/users/#user-object User Object
       def users
-        response = call_with_token('get', USER_API_BASE_PATH)
+        response = call_with_token('get', Constants::USER_API_BASE_PATH)
         JSON.parse(response.body)
       end
 
@@ -16,7 +16,7 @@ module Simpleokta
       # @return [Hash<User>]
       # @see https://developer.okta.com/docs/reference/api/users/#user-object User Object
       def user(user_id)
-        response = call_with_token('get', "#{USER_API_BASE_PATH}/#{user_id}")
+        response = call_with_token('get', "#{Constants::USER_API_BASE_PATH}/#{user_id}")
         JSON.parse(response.body)
       end
 
@@ -25,7 +25,7 @@ module Simpleokta
       # @return [Hash<User>]
       # @see https://developer.okta.com/docs/reference/api/users/#user-object User Object
       def user_from_login(login)
-        response = call_with_token('get', "#{USER_API_BASE_PATH}/#{ERB::Util.url_encode(login)}")
+        response = call_with_token('get', "#{Constants::USER_API_BASE_PATH}/#{ERB::Util.url_encode(login)}")
         JSON.parse(response.body)
       end
 
@@ -36,7 +36,7 @@ module Simpleokta
       # @see https://developer.okta.com/docs/reference/api/users/#create-user Create User
       # @see https://developer.okta.com/docs/reference/api/users/#profile-object Profile Object
       def create_user(user_profile_data)
-        response = call_with_token('post', USER_API_BASE_PATH, user_profile_data)
+        response = call_with_token('post', Constants::USER_API_BASE_PATH, user_profile_data)
         JSON.parse(response.body)
       end
 
@@ -50,7 +50,7 @@ module Simpleokta
       def create_user_in_group(user_profile_data, group_id_array)
         body = user_profile_data
         body[:groupIds] = group_id_array
-        response = call_with_token('post', USER_API_BASE_PATH, body)
+        response = call_with_token('post', Constants::USER_API_BASE_PATH, body)
       end
 
       # Delete a user in the okta instance
@@ -58,7 +58,7 @@ module Simpleokta
       # @return [Hash<User>]
       # @see https://developer.okta.com/docs/reference/api/users/#user-object User Object
       def delete_user(user_id)
-        response = call_with_token('delete', "#{USER_API_BASE_PATH}/#{user_id}")
+        response = call_with_token('delete', "#{Constants::USER_API_BASE_PATH}/#{user_id}")
         JSON.parse(response.body)
       end
 
@@ -69,7 +69,7 @@ module Simpleokta
       # @return [Hash<User>]
       # @see https://developer.okta.com/docs/reference/api/users/#user-object User Object
       def update_user(user_profile_data)
-        response = call_with_token('put', "#{USER_API_BASE_PATH}/#{user_id}", user_profile_data)
+        response = call_with_token('put', "#{Constants::USER_API_BASE_PATH}/#{user_id}", user_profile_data)
         JSON.parse(response.body)
       end
 
@@ -81,7 +81,7 @@ module Simpleokta
       #   If send_email is set to True, returns an empty hash.
       # @see https://developer.okta.com/docs/reference/api/users/#activate-user Activate User
       def activate_user(user_id, send_email)
-        response = call_with_token('post', "#{USER_API_BASE_PATH}/#{user_id}/lifecycle/activate?sendEmail=#{send_email.to_s}")
+        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/activate?sendEmail=#{send_email.to_s}")
         JSON.parse(response.body)
       end
 
@@ -92,7 +92,7 @@ module Simpleokta
       #   If send_email is set to True, returns an empty hash.
       # @see https://developer.okta.com/docs/reference/api/users/#reactivate-user Reactivate User
       def reactivate_user(user_id, send_email)
-        response = call_with_token('post', "#{USER_API_BASE_PATH}/#{user_id}/lifecycle/reactivate?sendEmail=#{send_email.to_s}")
+        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/reactivate?sendEmail=#{send_email.to_s}")
         JSON.parse(response.body)
       end
 
@@ -102,7 +102,7 @@ module Simpleokta
       # @return [Hash] empty hash
       # @see https://developer.okta.com/docs/reference/api/users/#deactivate-user Deactivate User
       def deactivate_user(user_id, send_email)
-        response = call_with_token('post', "#{USER_API_BASE_PATH}/#{user_id}/lifecycle/deactivate?sendEmail=#{send_email.to_s}")
+        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/deactivate?sendEmail=#{send_email.to_s}")
         JSON.parse(response.body)
       end
 
@@ -111,7 +111,7 @@ module Simpleokta
       # @return [Hash] empty hash
       # @see https://developer.okta.com/docs/reference/api/users/#suspend-user Suspend User
       def suspend_user(user_id)
-        response = call_with_token('post', "#{USER_API_BASE_PATH}/#{user_id}/lifecycle/suspend")
+        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/suspend")
         JSON.parse(response.body)
       end
 
@@ -121,7 +121,7 @@ module Simpleokta
       # @return [Hash] empty hash
       # @see https://developer.okta.com/docs/reference/api/users/#unsuspend-user Unsuspend User
       def unsuspend_user(user_id)
-        response = call_with_token('post', "#{USER_API_BASE_PATH}/#{user_id}/lifecycle/unsuspend")
+        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/unsuspend")
         JSON.parse(response.body)
       end
 
@@ -132,7 +132,7 @@ module Simpleokta
       # @return [Hash] empty hash
       # @see https://developer.okta.com/docs/reference/api/users/#unlock-user Unlock User
       def unlock_user(user_id)
-        response = call_with_token('post', "#{USER_API_BASE_PATH}/#{user_id}/lifecycle/unlock")
+        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/unlock")
         JSON.parse(response.body)
       end
 
@@ -142,7 +142,7 @@ module Simpleokta
       # @see https://developer.okta.com/docs/reference/api/apps/#application-object Application Object
       # @see https://developer.okta.com/docs/reference/api/apps/#list-applications-assigned-to-a-user List Applications Assigned to User
       def apps_assigned_to_user(user_id)
-        response = call_with_token('get', "#{APP_API_BASE_PATH}/?filter=user.id+eq+\"#{user_id}\"")
+        response = call_with_token('get', "#{Constants::APP_API_BASE_PATH}/?filter=user.id+eq+\"#{user_id}\"")
         JSON.parse(response.body)
       end
     end

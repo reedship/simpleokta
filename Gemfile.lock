@@ -2,6 +2,9 @@ PATH
   remote: .
   specs:
     simpleokta (0.1.0)
+      faraday
+      http
+      rack
 
 GEM
   remote: https://rubygems.org/
@@ -60,10 +63,22 @@ GEM
       addressable (~> 2.2)
       multipart-post (~> 1.1)
       rack (~> 1.1)
+    ffi (1.15.1)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     hashdiff (1.0.1)
+    http (4.4.1)
+      addressable (~> 2.3)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.2)
+      http-parser (~> 1.2.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    http-form_data (2.3.0)
+    http-parser (1.2.3)
+      ffi-compiler (>= 1.0, < 2.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0225)
@@ -110,6 +125,7 @@ DEPENDENCIES
   config
   dotenv
   faraday (~> 0.7.4)
+  http
   rake (~> 12.0)
   rest-client
   rspec (~> 3.0)
@@ -119,4 +135,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   2.2.12
+   2.2.13

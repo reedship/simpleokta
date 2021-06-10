@@ -1,8 +1,15 @@
+require 'http'
+require 'json'
+require 'erb'
+require 'simpleokta/apps'
+require 'simpleokta/auth_servers'
+require 'simpleokta/groups'
+require 'simpleokta/constants'
+require 'simpleokta/system_logs'
+require 'simpleokta/users'
+
 module Simpleokta
   class Client
-    require 'faraday'
-    require 'json'
-    require 'erb'
     include Apps
     include AuthServers
     include Groups
@@ -15,13 +22,9 @@ module Simpleokta
     # Initialize using passed in config hash
     # @param config [Hash]
     def initialize(config)
-      @api_token = config.api_token
-      @base_api_url = config.base_api_url
-    end
-
-    # Setting initial connection with base_api_url from config
-    def connection
-      @conn ||= Faraday.new(@base_api_url)
+      @api_token = config[:api_token]
+      @base_api_url = config[:base_api_url]
+      @http ||= HTTP.persistent(@base_api_url)
     end
 
     # This method will add our api_token to each authorization header to keep our code D.R.Y
@@ -31,13 +34,9 @@ module Simpleokta
     # @param body [Hash] the request body, set to an empty hash by default.
     #   Each request may require a different body schema.
     def call_with_token(action, url, body={})
-      connection.send(action) do |req|
-        req.url url
-        req.headers['Content-Type'] = 'application/json'
-        req.headers['Accept'] = 'application/json'
-        req.headers['Authorization'] = "SSWS #{@api_token}"
-        req.body = body
-      end
+      @http.headers(:accept => 'application/json')
+        .auth("SSWS #{@api_token}")
+        .send(action, url, :body => JSON.unparse(body))
     end
   end
 end
