@@ -34,9 +34,9 @@ module Simpleokta
     # @param body [Hash] the request body, set to an empty hash by default.
     #   Each request may require a different body schema.
     def call_with_token(action, url, body={})
-      @http.headers(:accept => 'application/json')
+      @http.headers(:accept => 'application/json', :content => 'application/json')
         .auth("SSWS #{@api_token}")
-        .send(action, url, :body => JSON.unparse(body))
+        .send(action, url, :json => JSON[body])
     end
   end
 end
