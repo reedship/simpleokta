@@ -320,8 +320,6 @@ module Simpleokta
 
     # CLAIMS METHODS
 
-    # @see https://developer.okta.com/docs/reference/api/authorization-servers/#claim-object Claim Object
-
     # Get all Claims defined for a given Authorization Server
     # @param auth_server_id [String] the unique id of the authorization server
     # @return [Array<Claim Object>]
@@ -438,7 +436,6 @@ module Simpleokta
     end
 
     # OAUTH 2.0 TOKEN MGMT OPERATIONS
-
 
     # Lists all Refresh Tokens issued by an Authorization Server for a specific client
     # @param auth_server_id [String] the unique id of the authorization server
