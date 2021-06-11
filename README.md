@@ -22,10 +22,13 @@ Or install it yourself as:
 
 ## Usage
 
+Pass in the `api_token` and `base_api_url` of your okta instance as a hash into the `Client` initializer.
+
 ```ruby
-config = Simpleokta::Configuration.new
-config.api_token = "API Token goes here. We'll pass it into the Authorization header for you"
-config.base_api_url = "https://myoktaorgurl.okta.com"
+config = {
+  :api_token => "API_TOKEN HERE",
+  :base_api_url => "URL HERE." #EX: 'https://dev-123456.okta.com'
+}
 @okta_util = Simpleokta::Client.new(config)
 ```
 
