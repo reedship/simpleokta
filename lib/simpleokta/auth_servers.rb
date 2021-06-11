@@ -5,7 +5,7 @@ module Simpleokta
 
       # Get an Authorization Server in the okta instance.
       # @param auth_server_id [String] The unique id of the authorization server
-      # @return [<Authorization Server Object>]
+      # @return [Hash<Authorization Server Object>]
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#authorization-server-object Authorization Server Object
       def auth_server(auth_server_id)
         response = call_with_token(
@@ -44,7 +44,7 @@ module Simpleokta
       # Update an Authorization Server in the okta instance.
       # @param auth_server_id [String] The unique id of the authorization server
       # @param auth_server_data [Hash] The Authorization Server Object you want to update
-      # @return [<Authorization Server Object>]
+      # @return [Hash<Authorization Server Object>]
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#update-authorization-server Update Authorization Server
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#authorization-server-object Authorization Server Object
       def update_auth_server(auth_server_id,auth_server_data)
