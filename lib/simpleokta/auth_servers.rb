@@ -153,7 +153,7 @@ module Simpleokta
       # Delete a Policy for a given Authorization Server
       # @param auth_server_id [String] the unique id of the authorization server
       # @param policy_id [String] the unique id of the policy
-      # @return [Hash<Policy Object>]
+      # @return 204 No Content
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#policy-object Policy Object
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#delete-a-policy Delete Policy
       def delete_policy(auth_server_id, policy_id)
@@ -233,7 +233,7 @@ module Simpleokta
     # @param auth_server_id [String] the unique id of the authorization server
     # @param policy_id [String] the unique id of the policy
     # @param rule_id [String] the unique id of the rule
-    # @return [Hash<Rule Object>]
+    # @return 204 No Content
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#rule-object Rule object
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#delete-a-policy-rule Delete Policy Rule
     def delete_rule(auth_server_id, policy_id, rule_id)
@@ -307,7 +307,7 @@ module Simpleokta
     # Delete a Scope for a given Authorization Server
     # @param auth_server_id [String] the unique id of the authorization server
     # @param scope_id [String] the unique id of the scope
-    # @return [Hash<Scope Object>]
+    # @return 204 No Content
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#scope-object Scope Object
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#delete-a-scope Delete Scope
     def delete_scope(auth_server_id, scope_id)
