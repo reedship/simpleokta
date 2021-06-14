@@ -40,14 +40,13 @@ module Simpleokta
         JSON.parse(response.body)
       end
 
-
       # Update an Authorization Server in the okta instance.
       # @param auth_server_id [String] The unique id of the authorization server
       # @param auth_server_data [Hash] The Authorization Server Object you want to update
       # @return [Hash<Authorization Server Object>]
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#update-authorization-server Update Authorization Server
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#authorization-server-object Authorization Server Object
-      def update_auth_server(auth_server_id,auth_server_data)
+      def update_auth_server(auth_server_id, _auth_server_data)
         response = call_with_token(
           'put',
           "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}"
@@ -111,7 +110,7 @@ module Simpleokta
       # @return [Hash<Policy Object>]
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#policy-object Policy Object
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#get-a-policy Get Policy
-      def policy(auth_server_id, policy_id)
+      def policy(auth_server_id, _policy_id)
         response = call_with_token(
           'get',
           "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}/policies"
@@ -416,7 +415,7 @@ module Simpleokta
       response = call_with_token(
         'post',
         "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}/credentials/lifecycle/keyRotate",
-        {'use': 'sig'}
+        { 'use': 'sig' }
       )
       JSON.parse(response.body)
     end
