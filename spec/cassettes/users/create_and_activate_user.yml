@@ -23,11 +23,11 @@ http_interactions:
       - http.rb/4.4.1
   response:
     status:
-      code: 200
-      message: OK
+      code: 400
+      message: Bad Request
     headers:
       Date:
-      - Tue, 15 Jun 2021 18:46:42 GMT
+      - Tue, 15 Jun 2021 19:12:17 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -40,10 +40,8 @@ http_interactions:
       - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
         pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
         max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
-      Vary:
-      - Accept-Encoding
       X-Okta-Request-Id:
-      - YMj1kufJV8QjMPZ0WdIXswAAAIc
+      - YMj7kQwb4Qdrp9Rsrw5CUwAAA38
       X-Xss-Protection:
       - '0'
       P3p:
@@ -53,7 +51,7 @@ http_interactions:
       X-Rate-Limit-Remaining:
       - '99'
       X-Rate-Limit-Reset:
-      - '1623782862'
+      - '1623784397'
       Cache-Control:
       - no-cache, no-store
       Pragma:
@@ -78,10 +76,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Set-Cookie:
-      - JSESSIONID=BD5A8CAA81EE7A9F78EFDC03622B40A7; Path=/; Secure; HttpOnly
+      - JSESSIONID=984DC75385F4EECEE4E88EF14F22C460; Path=/; Secure; HttpOnly
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
     body:
       encoding: UTF-8
-      string: '{"id":"00u10pbckoexzKGx15d7","status":"PROVISIONED","created":"2021-06-15T18:46:42.000Z","activated":"2021-06-15T18:46:42.000Z","statusChanged":"2021-06-15T18:46:42.000Z","lastLogin":null,"lastUpdated":"2021-06-15T18:46:42.000Z","passwordChanged":null,"type":{"id":"otyxf5ks7cG0MW7nU5d6"},"profile":{"firstName":"Isaac","lastName":"Brock","mobilePhone":"555-415-1337","secondEmail":null,"login":"isaac.brock@example.com","email":"isaac.brock@example.com"},"credentials":{"emails":[{"value":"isaac.brock@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"suspend":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pbckoexzKGx15d7/lifecycle/suspend","method":"POST"},"schema":{"href":"https://dev-47339917.okta.com/api/v1/meta/schemas/user/oscxf5ks7cG0MW7nU5d6"},"resetPassword":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pbckoexzKGx15d7/lifecycle/reset_password","method":"POST"},"reactivate":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pbckoexzKGx15d7/lifecycle/reactivate","method":"POST"},"self":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pbckoexzKGx15d7"},"type":{"href":"https://dev-47339917.okta.com/api/v1/meta/types/user/otyxf5ks7cG0MW7nU5d6"},"deactivate":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pbckoexzKGx15d7/lifecycle/deactivate","method":"POST"}}}'
-  recorded_at: Tue, 15 Jun 2021 18:46:42 GMT
+      string: '{"errorCode":"E0000001","errorSummary":"Api validation failed: login","errorLink":"E0000001","errorId":"oaecu_pG6-LSvCSJfTKP6Tmxw","errorCauses":[{"errorSummary":"login:
+        An object with this field already exists in the current organization"}]}'
+  recorded_at: Tue, 15 Jun 2021 19:12:17 GMT
 recorded_with: VCR 6.0.0

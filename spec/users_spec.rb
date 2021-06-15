@@ -76,7 +76,7 @@ RSpec.describe Simpleokta::Client::Users do
   end
   describe '#create_and_activate_user' do
     it 'creates an active user when passed a valid profile object' do
-      VCR.use_cassette('user/create_and_activate_user') do
+      VCR.use_cassette('users/create_and_activate_user') do
         response = client.create_and_activate_user(profile_object)
         expect(response['status']).to eq('PROVISIONED')
         expect(response['activated']).not_to eq(nil)
@@ -85,7 +85,7 @@ RSpec.describe Simpleokta::Client::Users do
       end
     end
     it 'returns an error hash when passing invalid parameters' do
-      VCR.use_cassette('user/invalid_create_and_activate') do
+      VCR.use_cassette('users/invalid_create_and_activate') do
         response = client.create_and_activate_user({boop: 'bap'})
         expect(response['errorCode']).to eq('E0000003')
         expect(response['errorSummary']).to eq('The request body was not well-formed.')
