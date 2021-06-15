@@ -85,12 +85,13 @@ module Simpleokta
       end
 
       # Update a user in the okta instance
+      # @param user_id [String] the unique id of a user in the okta instance
       # @param user_profile_data [Hash] the required fields to create a user in okta.
       #   At minimum, this should contain the Profile object.
       #   Any fields not passed in user_profile_data will be set to null in the user data
       # @return [Hash<User>]
       # @see https://developer.okta.com/docs/reference/api/users/#user-object User Object
-      def update_user(user_profile_data)
+      def update_user(user_id, user_profile_data)
         response = call_with_token('put', "#{Constants::USER_API_BASE_PATH}/#{user_id}", user_profile_data)
         JSON.parse(response.body)
       end

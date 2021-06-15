@@ -130,7 +130,7 @@ RSpec.describe Simpleokta::Client::Users do
         expect(response['status']).to eq('DEPROVISIONED')
       end
     end
-    it 'returns an error when passed an invalid user_id' do
+    it 'returns a 404 when passed an invalid user_id' do
       VCR.use_cassette('users/invalid_delete_user') do
         response = client.delete_user('somethingfake')
         expect(response.code).to eq(404)
@@ -138,18 +138,49 @@ RSpec.describe Simpleokta::Client::Users do
     end
   end
   describe '#update_user' do
-    it 'updates a user when passed valid parameters' do
-      VCR.use_cassette('users/update_user') do
-      end
-    end
     it 'returns an error hash when passed invalid parameters' do
       VCR.use_cassette('users/invalid_update_user') do
-
+        new_profile_data = {
+          profile: {
+            mobilePhone: '555-415-1337'
+          }
+        }
+        response = client.update_user('00u10ribsoVWUttmX5d7', new_profile_data)
+        expect(response['errorCode']).to eq('E0000001')
+        expect(response['errorCauses'].count).to eq(5)
+      end
+    end
+    it 'updates a user when passed valid parameters' do
+      VCR.use_cassette('users/update_user') do
+        new_profile_data = {
+          profile: {
+            firstName: 'Isaac2',
+            lastName: 'Brock2',
+            email: 'isaac.brock2@example.com',
+            login: 'isaac.brock@example.com',
+            mobilePhone: '555-415-1337'
+          }
+        }
+        response = client.update_user('00u10ribsoVWUttmX5d7', new_profile_data)
+        expect(response['profile']['firstName']).to eq('Isaac2')
+        expect(response['profile']['lastName']).to eq('Brock2')
+        expect(response['profile']['mobilePhone']).to eq('555-415-1337')
       end
     end
     it 'returns an error when passed an invalid user_id' do
       VCR.use_cassette('users/invalid_id_update_user') do
-
+        profile_data = {
+          profile: {
+            firstName: 'David',
+            lastName: 'David',
+            email: 'david.david@example.com',
+            login: 'david.david@example.com',
+            mobilePhone: '555-415-1337'
+          }
+        }
+        response = client.update_user('fakeuserid', profile_data)
+        expect(response['errorCode']).to eq('E0000007')
+        expect(response['errorSummary']).to eq('Not found: Resource not found: fakeuserid (User)')
       end
     end
   end
