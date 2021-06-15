@@ -3,8 +3,10 @@ require 'simpleokta/apps'
 
 RSpec.describe Simpleokta::Client::Apps do
   it "returns a list of applications" do
-    response = client.apps
-    expect(response.body).not_to be(nil)
+    VCR.use_cassette('apps/all_apps') do
+      response = client.apps
+      expect(response).not_to be(nil)
+    end
   end
 end
 

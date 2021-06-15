@@ -24,7 +24,7 @@ module Simpleokta
     def initialize(config)
       @api_token = config[:api_token]
       @base_api_url = config[:base_api_url]
-      @http ||= HTTP.persistent(@base_api_url)
+      @http ||= HTTP::Client.new()
     end
 
     # This method will add our api_token to each authorization header to keep our code D.R.Y
@@ -34,9 +34,11 @@ module Simpleokta
     # @param body [Hash] the request body, set to an empty hash by default.
     #   Each request may require a different body schema.
     def call_with_token(action, url, body={})
-      @http.headers(:accept => 'application/json', :content => 'application/json')
+      uri = @base_api_url + url
+      @http
+        .headers(:accept => 'application/json', :content => 'application/json')
         .auth("SSWS #{@api_token}")
-        .send(action, url, :json => JSON[body])
+        .send(action, uri, {:json => body})
     end
   end
 end

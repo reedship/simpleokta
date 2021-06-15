@@ -1,4 +1,6 @@
 require "vcr"
+require 'simpleokta/client'
+require 'dotenv/load'
 
 module AgentsAccessTokenFilter
   private
@@ -41,7 +43,7 @@ end
 
 module TestingClient
   extend RSpec::SharedContext
-  let(:client) { Simpleokta::Client.new({:token => fake_okta_api_token, :base_api_url => ''}) }
+  let(:client) { Simpleokta::Client.new({:api_token => ENV['API_TOKEN'], :base_api_url => ENV['BASE_API_URL']}) }
 end
 
 RSpec.configure do |config|
@@ -50,4 +52,8 @@ end
 
 def fake_okta_api_token
   ENV.fetch('API_TOKEN', 'x'*40)
+end
+
+def fake_base_api_url
+  ENV.fetch('BASE_API_URL', 'y'*25)
 end
