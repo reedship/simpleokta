@@ -119,24 +119,27 @@ RSpec.describe Simpleokta::Client::Users do
   describe '#delete_user' do
     it 'deletes a user when the user has a status of DEPROVISIONED' do
       VCR.use_cassette('users/delete_user') do
-
+        response = client.delete_user('00u10q3ie478QZVxc5d7')
+        expect(response.code).to eq(204)
       end
     end
     it 'sets a user status to DEACTIVATED when called on a user whose status != DEACTIVATED' do
       VCR.use_cassette('users/delete_user_active') do
-
+        client.delete_user('00u10ribsoVWUttmX5d7')
+        response = client.user('00u10ribsoVWUttmX5d7')
+        expect(response['status']).to eq('DEPROVISIONED')
       end
     end
     it 'returns an error when passed an invalid user_id' do
       VCR.use_cassette('users/invalid_delete_user') do
-
+        response = client.delete_user('somethingfake')
+        expect(response.code).to eq(404)
       end
     end
   end
   describe '#update_user' do
     it 'updates a user when passed valid parameters' do
       VCR.use_cassette('users/update_user') do
-
       end
     end
     it 'returns an error hash when passed invalid parameters' do
@@ -153,17 +156,29 @@ RSpec.describe Simpleokta::Client::Users do
   describe '#activate_user' do
     it 'activates a user when the given user is deactivated' do
       VCR.use_cassette('users/activate_user') do
-
+        response = client.activate_user('00u10q2zmvugkWr7d5d7', false)
+        expect(response).not_to be(nil)
       end
     end
     it 'returns a 403 error code when the given user is already active' do
-
+      VCR.use_cassette('users/invalid_activate_user') do
+        response = client.activate_user('00u10q2zmvugkWr7d5d7', false)
+        expect(response['errorCode']).to eq('E0000016')
+        expect(response['errorSummary']).to eq('Activation failed because the user is already active')
+      end
     end
     it 'returns an error when passed an invalid user_id' do
-
+      VCR.use_cassette('users/invalid_id_activate_user') do
+        response = client.activate_user('fakeuserid', false)
+        expect(response['errorCode']).to eq('E0000007')
+        expect(response['errorSummary']).to eq('Not found: Resource not found: fakeuserid (User)')
+      end
     end
     it 'returns the expected body' do
-
+      VCR.use_cassette('users/activate_user') do
+        response = client.activate_user('00u10q2zmvugkWr7d5d7', false)
+        expect(response.keys).to eq(['activationUrl','activationToken'])
+      end
     end
   end
   describe '#reactivate_user' do

@@ -81,7 +81,7 @@ module Simpleokta
       # @see https://developer.okta.com/docs/reference/api/users/#user-object User Object
       def delete_user(user_id)
         response = call_with_token('delete', "#{Constants::USER_API_BASE_PATH}/#{user_id}")
-        JSON.parse(response.body)
+        response
       end
 
       # Update a user in the okta instance
