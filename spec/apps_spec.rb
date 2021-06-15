@@ -1,12 +1,27 @@
+# frozen_string_literal: true
+
 require 'vcr'
 require 'simpleokta/apps'
 
 RSpec.describe Simpleokta::Client::Apps do
-  it "returns a list of applications" do
+  it 'returns a list of applications' do
     VCR.use_cassette('apps/all_apps') do
       response = client.apps
       expect(response).not_to be(nil)
     end
   end
+  it 'returns a single application when passed an id' do
+    VCR.use_cassette('apps/single_app') do
+      response = client.app('0oaxf5krmAOlBwXdS5d6')
+      expect(response['label']).to eq('Okta Admin Console')
+      expect(response['name']).to eq('saasure')
+      expect(response['created']).to eq('2021-06-10T15:04:42.000Z')
+    end
+  end
+  it 'returns the users assigned to the app' do
+    VCR.use_cassette('apps/app_users') do
+      response = client.users_assigned_to_application('0oaxf5krmAOlBwXdS5d6')
+      expect(response.first['id']).to eq('00uxf5kx9MpPC2jpb5d6')
+    end
+  end
 end
-

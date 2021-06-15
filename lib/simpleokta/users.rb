@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Simpleokta
   class Client
     module Users
@@ -81,7 +83,8 @@ module Simpleokta
       #   If send_email is set to True, returns an empty hash.
       # @see https://developer.okta.com/docs/reference/api/users/#activate-user Activate User
       def activate_user(user_id, send_email)
-        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/activate?sendEmail=#{send_email.to_s}")
+        response = call_with_token('post',
+                                   "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/activate?sendEmail=#{send_email}")
         JSON.parse(response.body)
       end
 
@@ -92,7 +95,8 @@ module Simpleokta
       #   If send_email is set to True, returns an empty hash.
       # @see https://developer.okta.com/docs/reference/api/users/#reactivate-user Reactivate User
       def reactivate_user(user_id, send_email)
-        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/reactivate?sendEmail=#{send_email.to_s}")
+        response = call_with_token('post',
+                                   "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/reactivate?sendEmail=#{send_email}")
         JSON.parse(response.body)
       end
 
@@ -102,7 +106,8 @@ module Simpleokta
       # @return [Hash] empty hash
       # @see https://developer.okta.com/docs/reference/api/users/#deactivate-user Deactivate User
       def deactivate_user(user_id, send_email)
-        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/deactivate?sendEmail=#{send_email.to_s}")
+        response = call_with_token('post',
+                                   "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/deactivate?sendEmail=#{send_email}")
         JSON.parse(response.body)
       end
 
@@ -146,6 +151,5 @@ module Simpleokta
         JSON.parse(response.body)
       end
     end
-
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Simpleokta
   class Client
     module Groups
@@ -54,7 +56,7 @@ module Simpleokta
       # @param group_id [String] the unique identifier of the group
       # @return [Group Assignment]
       # @see https://developer.okta.com/docs/reference/api/apps/#response-example-34 Group Assignment Response
-      def get_assigned_group_for_application(app_id,group_id)
+      def get_assigned_group_for_application(app_id, group_id)
         response = call_with_token('get', "#{Constants::APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
         JSON.parse(response.body)
       end
@@ -117,18 +119,17 @@ module Simpleokta
       # @return [Hash<RuleObject>]
       # @see https://developer.okta.com/docs/reference/api/groups/#create-group-rule Create Group Rule
       # @see  https://developer.okta.com/docs/reference/api/groups/#rule-object Rule Object
-      def create_group_rule(group_id, rule_data)
+      def create_group_rule(group_id, _rule_data)
         response = call_with_token('post', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}/users/#{user_id}")
         JSON.parse(response.body)
       end
-
 
       # Update a group rule
       # @param group_id [String] the unique identifier of the group
       # @param rule_id [String] the id for the rule
       # @return [Hash<RoleObject>]
       # @see https://developer.okta.com/docs/reference/api/groups/#update-group-rule Update Group Rule
-      def update_group_rule(group_id, rule_data)
+      def update_group_rule(group_id, _rule_data)
         response = call_with_token('put', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}/users/#{user_id}")
         JSON.parse(response.body)
       end

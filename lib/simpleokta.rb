@@ -1,6 +1,8 @@
-require "simpleokta/version"
-require "simpleokta/client"
-require "faraday"
+# frozen_string_literal: true
+
+require 'simpleokta/version'
+require 'simpleokta/client'
+require 'faraday'
 
 # @author Braden Shipley
 module Simpleokta

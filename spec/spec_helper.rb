@@ -1,4 +1,6 @@
-require "vcr"
+# frozen_string_literal: true
+
+require 'vcr'
 require 'simpleokta/client'
 require 'dotenv/load'
 
@@ -8,7 +10,7 @@ module AgentsAccessTokenFilter
   def serializable_body(*)
     body = super
     body['string'].gsub!(/"access_token":\s*"\w+"/, '"access_token": "<<AGENT_ACCESS_TOKEN>>"')
-    body['string'].gsub!(/"ip_address":\s*"[\d\.]+"/, '"ip_address": "127.0.0.1"')
+    body['string'].gsub!(/"ip_address":\s*"[\d.]+"/, '"ip_address": "127.0.0.1"')
     body
   end
 end
@@ -16,7 +18,7 @@ end
 VCR::Response.include(AgentsAccessTokenFilter)
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
+  config.example_status_persistence_file_path = '.rspec_status'
 
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
@@ -36,14 +38,11 @@ RSpec.configure do |config|
       i.response.body.force_encoding('UTF-8')
     end
   end
-
-
 end
-
 
 module TestingClient
   extend RSpec::SharedContext
-  let(:client) { Simpleokta::Client.new({:api_token => ENV['API_TOKEN'], :base_api_url => ENV['BASE_API_URL']}) }
+  let(:client) { Simpleokta::Client.new({ api_token: ENV['API_TOKEN'], base_api_url: ENV['BASE_API_URL'] }) }
 end
 
 RSpec.configure do |config|
@@ -51,9 +50,9 @@ RSpec.configure do |config|
 end
 
 def fake_okta_api_token
-  ENV.fetch('API_TOKEN', 'x'*40)
+  ENV.fetch('API_TOKEN', 'x' * 40)
 end
 
 def fake_base_api_url
-  ENV.fetch('BASE_API_URL', 'y'*25)
+  ENV.fetch('BASE_API_URL', 'y' * 25)
 end
