@@ -31,14 +31,33 @@ module Simpleokta
         JSON.parse(response.body)
       end
 
-      # Create a user in the okta instance
+      # Create a user in the okta instance without credentials
+      # @param user_profile_data [Hash] the required fields to create a user in okta.
+      #   At minimum, this should contain the Profile object.
+      # @example Profile Object
+      #     "profile": {
+      #       "firstName": "Isaac",
+      #       "lastName": "Brock",
+      #       "email": "isaac.brock@example.com",
+      #       "login": "isaac.brock@example.com",
+      #       "mobilePhone": "555-415-1337"
+      #     }
+      # @return [Hash<User>]
+      # @see https://developer.okta.com/docs/reference/api/users/#create-user Create User
+      # @see https://developer.okta.com/docs/reference/api/users/#profile-object Profile Object
+      def create_user(user_profile_data)
+        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}?activate=false", user_profile_data)
+        JSON.parse(response.body)
+      end
+
+      # Create an activated user in the okta instance without credentials
       # @param user_profile_data [Hash] the required fields to create a user in okta.
       #   At minimum, this should contain the Profile object.
       # @return [Hash<User>]
       # @see https://developer.okta.com/docs/reference/api/users/#create-user Create User
       # @see https://developer.okta.com/docs/reference/api/users/#profile-object Profile Object
-      def create_user(user_profile_data)
-        response = call_with_token('post', Constants::USER_API_BASE_PATH, user_profile_data)
+      def create_and_activate_user(user_profile_data)
+        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}?activate=true", user_profile_data)
         JSON.parse(response.body)
       end
 
