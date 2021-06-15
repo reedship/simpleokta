@@ -7,7 +7,8 @@ RSpec.describe Simpleokta::Client::Apps do
   it 'returns a list of applications' do
     VCR.use_cassette('apps/all_apps') do
       response = client.apps
-      expect(response).not_to be(nil)
+      expect(response.count).to eq(4)
+      expect(response.first['id']).to eq('0oaxf5krmAOlBwXdS5d6')
     end
   end
   it 'returns a single application when passed an id' do
