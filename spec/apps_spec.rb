@@ -42,4 +42,22 @@ RSpec.describe Simpleokta::Client::Apps do
       expect(response['label']).to eq('A New Application')
     end
   end
+  it 'updates an app when passed a valid app_data object' do
+    VCR.use_cassette('apps/update_app') do
+      app_data = {
+        "name": "template_basic_auth",
+        "label": "A New Application: Electric Boogaloo",
+        "signOnMode": "BASIC_AUTH",
+        "settings": {
+          "app": {
+            "url": "https://example.com/login.html",
+            "authURL": "https://example.com/auth.html"
+          }
+        }
+      }
+      response = client.update_app('0oa10ggguzH2JBB0I5d7', app_data)
+      expect(response['id']).to eq('0oa10ggguzH2JBB0I5d7')
+      expect(response['label']).to eq('A New Application: Electric Boogaloo')
+    end
+  end
 end
