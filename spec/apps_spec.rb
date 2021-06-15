@@ -60,4 +60,22 @@ RSpec.describe Simpleokta::Client::Apps do
       expect(response['label']).to eq('A New Application: Electric Boogaloo')
     end
   end
+  it 'activates an app when passed a valid id' do
+    VCR.use_cassette('apps/activate_app') do
+      response = client.activate_app('0oa10ggguzH2JBB0I5d7')
+      expect(response).to eq('Application with id: 0oa10ggguzH2JBB0I5d7 activated')
+    end
+  end
+  it 'deactivates an app when passed a valid id' do
+    VCR.use_cassette('apps/deactivate_app') do
+      response = client.deactivate_app('0oa10ggguzH2JBB0I5d7')
+      expect(response).to eq('Application with id: 0oa10ggguzH2JBB0I5d7 deactivated')
+    end
+  end
+  it 'deletes an app when passed a valid id' do
+    VCR.use_cassette('apps/delete_app') do
+      response = client.delete_app('0oa10ggguzH2JBB0I5d7')
+      expect(response.code).to eq(204)
+    end
+  end
 end

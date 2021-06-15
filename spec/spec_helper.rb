@@ -52,7 +52,3 @@ end
 def fake_okta_api_token
   ENV.fetch('API_TOKEN', 'x' * 40)
 end
-
-def fake_base_api_url
-  ENV.fetch('BASE_API_URL', 'y' * 25)
-end

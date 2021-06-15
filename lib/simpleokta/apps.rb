@@ -68,10 +68,10 @@ module Simpleokta
 
       # Delete an application by id
       # @param app_id [String] the unique id of the application
-      # @return {}
+      # @return 204 No Content
       def delete_app(app_id)
         response = call_with_token('delete', "#{Constants::APP_API_BASE_PATH}/#{app_id}")
-        JSON.parse(response.body)
+        response
       end
 
       # Activate an application by id
