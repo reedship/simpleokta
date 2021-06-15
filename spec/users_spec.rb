@@ -89,8 +89,125 @@ RSpec.describe Simpleokta::Client::Users do
         response = client.create_and_activate_user({boop: 'bap'})
         expect(response['errorCode']).to eq('E0000003')
         expect(response['errorSummary']).to eq('The request body was not well-formed.')
-
       end
     end
+  end
+  describe '#create_user_in_group' do
+    it 'creates a user in a given group when passed valid parameters' do
+
+    end
+    it 'returns an error hash when passed invalid parameters' do
+
+    end
+    it 'returns an error when passed an invalid group_id' do
+
+    end
+  end
+  describe '#delete_user' do
+    it 'returns an error when the user is not deactivated' do
+
+    end
+    it 'deletes a user when the user has a status of DEPROVISIONED' do
+
+    end
+    it 'sets a user status to DEACTIVATED when called on a user whose status != DEACTIVATED' do
+
+    end
+    it 'returns an error when passed an invalid user_id' do
+
+    end
+  end
+  describe '#update_user' do
+    it 'updates a user when passed valid parameters' do
+
+    end
+    it 'returns an error hash when passed invalid parameters' do
+
+    end
+    it 'returns an error when passed an invalid user_id' do
+
+    end
+  end
+  describe '#activate_user' do
+    it 'activates a user when the given user is deactivated' do
+
+    end
+    it 'returns a 403 error code when the given user is already active' do
+
+    end
+    it 'returns an error when passed an invalid user_id' do
+
+    end
+    it 'returns the expected body' do
+
+    end
+  end
+  describe '#reactivate_user' do
+    it 'reactivates a user when the given user is deactivated' do
+
+    end
+    it 'returns a 403 error code when the given user is already active' do
+
+    end
+    it 'returns an error when passed an invalid user_id' do
+
+    end
+    it 'returns the expected body' do
+
+    end
+  end
+  describe '#deactivate_user' do
+    it 'deactivates a user when the given user is active' do
+
+    end
+    it 'returns a 403 error code when the given user is already deactivated' do
+
+    end
+    it 'returns an error when passed an invalid user_id' do
+
+    end
+    it 'returns a status code of 200' do
+
+    end
+  end
+  describe '#suspend_user' do
+    it 'suspends a user when passed a valid user_id' do
+
+    end
+    it 'returns an error when passed an invalid user_id' do
+
+    end
+    it 'returns an error when user does not have a status of ACTIVE' do
+
+    end
+    it 'returns a status code of 200' do
+
+    end
+  end
+  describe '#unsuspend_user' do
+    it 'suspends a user when passed a valid user_id' do
+
+    end
+    it 'returns an error when passed an invalid user_id' do
+
+    end
+    it 'returns an error when user does not have a status of SUSPENDED' do
+
+    end
+    it 'returns a status code of 200' do
+
+    end
+  end
+  describe '#unlock_user' do
+    it 'unlocks a user whose status == LOCKED_OUT' do
+
+    end
+    it 'returns a status code of 200' do
+
+    end
+    it 'sets the user status to ACTIVE' do
+
+    end
+
   end
 end
