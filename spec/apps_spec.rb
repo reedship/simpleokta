@@ -24,4 +24,22 @@ RSpec.describe Simpleokta::Client::Apps do
       expect(response.first['id']).to eq('00uxf5kx9MpPC2jpb5d6')
     end
   end
+  it 'creates an application when passed a valid request body' do
+    VCR.use_cassette('apps/create_app') do
+      app_data = {
+        "name": "template_basic_auth",
+        "label": "A New Application",
+        "signOnMode": "BASIC_AUTH",
+        "settings": {
+          "app": {
+            "url": "https://example.com/login.html",
+            "authURL": "https://example.com/auth.html"
+          }
+        }
+      }
+      response = client.create_app(app_data)
+      expect(response['id']).to eq('0oa10ggguzH2JBB0I5d7')
+      expect(response['label']).to eq('A New Application')
+    end
+  end
 end

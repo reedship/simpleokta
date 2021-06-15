@@ -50,7 +50,7 @@ module Simpleokta
       # @return [Hash<Application Object>]
       # @see https://developer.okta.com/docs/reference/api/apps/#application-object Application Object
       def create_app(app_data)
-        response = call_with_token('post', Constants::APP_API_BASE_PATH, app_data.to_json)
+        response = call_with_token('post', Constants::APP_API_BASE_PATH, app_data)
         JSON.parse(response.body)
       end
 
