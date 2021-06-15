@@ -72,6 +72,7 @@ module Simpleokta
         body = user_profile_data
         body[:groupIds] = group_id_array
         response = call_with_token('post', Constants::USER_API_BASE_PATH, body)
+        JSON.parse(response.body)
       end
 
       # Delete a user in the okta instance

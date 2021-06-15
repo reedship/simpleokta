@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://dev-47339917.okta.com/api/v1/users?activate=true
+    uri: https://dev-47339917.okta.com/api/v1/users
     body:
       encoding: UTF-8
-      string: '{"profile":{"firstName":"Isaac","lastName":"Brock","email":"isaac.brock@example.com","login":"isaac.brock@example.com","mobilePhone":"555-415-1337"}}'
+      string: '{"profile":{"firstName":"Isaac","lastName":"Brock","email":"isaac.brock@example.com","login":"isaac.brock@example.com","mobilePhone":"555-415-1337"},"groupIds":["12345678901011"]}'
     headers:
       Accept:
       - application/json
@@ -23,11 +23,11 @@ http_interactions:
       - http.rb/4.4.1
   response:
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
     headers:
       Date:
-      - Tue, 15 Jun 2021 19:25:48 GMT
+      - Tue, 15 Jun 2021 19:39:37 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -43,7 +43,7 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Okta-Request-Id:
-      - YMj@vFrS0m7orKTfKQE9fgAACOg
+      - YMkB@Rpc0ovUR@SDQPKRrgAACNI
       X-Xss-Protection:
       - '0'
       P3p:
@@ -51,9 +51,9 @@ http_interactions:
       X-Rate-Limit-Limit:
       - '100'
       X-Rate-Limit-Remaining:
-      - '99'
+      - '97'
       X-Rate-Limit-Reset:
-      - '1623785208'
+      - '1623785979'
       Cache-Control:
       - no-cache, no-store
       Pragma:
@@ -78,10 +78,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Set-Cookie:
-      - JSESSIONID=24E23F723F88FD083631E1D39E68CF56; Path=/; Secure; HttpOnly
+      - JSESSIONID=377F009A1F5FCC6EEACAA44727CCEFF8; Path=/; Secure; HttpOnly
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
     body:
       encoding: UTF-8
-      string: '{"id":"00u10pofexfy89TnX5d7","status":"PROVISIONED","created":"2021-06-15T19:25:48.000Z","activated":"2021-06-15T19:25:48.000Z","statusChanged":"2021-06-15T19:25:48.000Z","lastLogin":null,"lastUpdated":"2021-06-15T19:25:48.000Z","passwordChanged":null,"type":{"id":"otyxf5ks7cG0MW7nU5d6"},"profile":{"firstName":"Isaac","lastName":"Brock","mobilePhone":"555-415-1337","secondEmail":null,"login":"isaac.brock@example.com","email":"isaac.brock@example.com"},"credentials":{"emails":[{"value":"isaac.brock@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"suspend":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pofexfy89TnX5d7/lifecycle/suspend","method":"POST"},"schema":{"href":"https://dev-47339917.okta.com/api/v1/meta/schemas/user/oscxf5ks7cG0MW7nU5d6"},"resetPassword":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pofexfy89TnX5d7/lifecycle/reset_password","method":"POST"},"reactivate":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pofexfy89TnX5d7/lifecycle/reactivate","method":"POST"},"self":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pofexfy89TnX5d7"},"type":{"href":"https://dev-47339917.okta.com/api/v1/meta/types/user/otyxf5ks7cG0MW7nU5d6"},"deactivate":{"href":"https://dev-47339917.okta.com/api/v1/users/00u10pofexfy89TnX5d7/lifecycle/deactivate","method":"POST"}}}'
-  recorded_at: Tue, 15 Jun 2021 19:25:48 GMT
+      string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
+        12345678901011 (UserGroup)","errorLink":"E0000007","errorId":"oaeFCtZNNe4SkytqKUqbA0OEQ","errorCauses":[]}'
+  recorded_at: Tue, 15 Jun 2021 19:39:37 GMT
 recorded_with: VCR 6.0.0

@@ -94,43 +94,67 @@ RSpec.describe Simpleokta::Client::Users do
   end
   describe '#create_user_in_group' do
     it 'creates a user in a given group when passed valid parameters' do
-
+      VCR.use_cassette('users/create_user_in_group') do
+        response = client.create_user_in_group(profile_object, ['00g10pnp6v3Brgwlx5d7'])
+        expect(response['id']).to eq('00u10pwwcjHUTNRmU5d7')
+        expect(response['profile']['firstName']).to eq('Isaac')
+        expect(response['profile']['lastName']).to eq('Brock')
+      end
     end
     it 'returns an error hash when passed invalid parameters' do
-
+      VCR.use_cassette('users/invalid_create_user_in_group') do
+        response = client.create_user_in_group({boop: 'bap'}, ['00g10pnp6v3Brgwlx5d7'])
+        expect(response['errorCode']).to eq('E0000003')
+        expect(response['errorSummary']).to eq('The request body was not well-formed.')
+      end
     end
     it 'returns an error when passed an invalid group_id' do
-
+      VCR.use_cassette('users/invalid_group_create_user_in_group') do
+        response = client.create_user_in_group(profile_object, ['12345678901011'])
+        expect(response['errorCode']).to eq('E0000007')
+        expect(response['errorSummary']).to eq('Not found: Resource not found: 12345678901011 (UserGroup)')
+      end
     end
   end
   describe '#delete_user' do
-    it 'returns an error when the user is not deactivated' do
-
-    end
     it 'deletes a user when the user has a status of DEPROVISIONED' do
+      VCR.use_cassette('users/delete_user') do
 
+      end
     end
     it 'sets a user status to DEACTIVATED when called on a user whose status != DEACTIVATED' do
+      VCR.use_cassette('users/delete_user_active') do
 
+      end
     end
     it 'returns an error when passed an invalid user_id' do
+      VCR.use_cassette('users/invalid_delete_user') do
 
+      end
     end
   end
   describe '#update_user' do
     it 'updates a user when passed valid parameters' do
+      VCR.use_cassette('users/update_user') do
 
+      end
     end
     it 'returns an error hash when passed invalid parameters' do
+      VCR.use_cassette('users/invalid_update_user') do
 
+      end
     end
     it 'returns an error when passed an invalid user_id' do
+      VCR.use_cassette('users/invalid_id_update_user') do
 
+      end
     end
   end
   describe '#activate_user' do
     it 'activates a user when the given user is deactivated' do
+      VCR.use_cassette('users/activate_user') do
 
+      end
     end
     it 'returns a 403 error code when the given user is already active' do
 
