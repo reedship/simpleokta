@@ -245,7 +245,7 @@ RSpec.describe Simpleokta::Client::Users do
     it 'deactivates a user when the given user is active' do
       VCR.use_cassette('users/deactivate_user') do
         response = client.deactivate_user('00u10ribsoVWUttmX5d7', false)
-        expect(response.code).to eq(200)
+        expect(response).to eq({})
       end
     end
     it 'returns an error when passed an invalid user_id' do
@@ -254,26 +254,47 @@ RSpec.describe Simpleokta::Client::Users do
         expect(response['errorCode']).to eq('E0000007')
         expect(response['errorSummary']).to eq('Not found: Resource not found: fakeuserid (User)')
       end
-
     end
   end
   describe '#suspend_user' do
     it 'suspends a user when passed a valid user_id' do
-
+      VCR.use_cassette('users/suspend_user') do
+        response = client.suspend_user('00u10x5qqh0j0yTHK5d7')
+        expect(response.code).to eq(200)
+      end
     end
     it 'returns an error when passed an invalid user_id' do
+      VCR.use_cassette('users/invalid_suspend_user') do
+        response = client.suspend_user('fakeuserid')
+        expect(JSON.parse(response.body)['errorCode']).to eq('E0000007')
+        expect(JSON.parse(response.body)['errorSummary']).to eq('Not found: Resource not found: fakeuserid (User)')
+      end
 
     end
     it 'returns an error when user does not have a status of ACTIVE' do
-
+      VCR.use_cassette('users/suspend_user_active') do
+        response = client.suspend_user('00u10x5qqh0j0yTHK5d7')
+        expect(response.code).to eq(400)
+        expect(JSON.parse(response.body)['errorCode']).to eq('E0000001')
+        expect(JSON.parse(response.body)['errorSummary']).to eq('Api validation failed: suspendUser')
+      end
     end
     it 'returns a status code of 200' do
+      VCR.use_cassette('users/suspend_user') do
+        response = client.suspend_user('00u10x5qqh0j0yTHK5d7')
+        expect(response.code).to eq(200)
+      end
 
     end
   end
   describe '#unsuspend_user' do
-    it 'suspends a user when passed a valid user_id' do
-
+    it 'unsuspends a user when passed a valid user_id' do
+      VCR.use_cassette('users/unsuspend_user') do
+        response = client.unsuspend_user('00u10x5qqh0j0yTHK5d7')
+        user = client.user('00u10x5qqh0j0yTHK5d7')
+        expect(response.code).to eq(200)
+        expect(user['status']).to eq('PASSWORD_EXPIRED')
+      end
     end
     it 'returns an error when passed an invalid user_id' do
 

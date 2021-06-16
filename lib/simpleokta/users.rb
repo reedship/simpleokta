@@ -129,7 +129,7 @@ module Simpleokta
       def deactivate_user(user_id, send_email)
         response = call_with_token('post',
                                    "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/deactivate?sendEmail=#{send_email}")
-        response
+        JSON.parse(response.body)
       end
 
       # Suspend a user in the okta instance.
@@ -137,8 +137,7 @@ module Simpleokta
       # @return [Hash] empty hash
       # @see https://developer.okta.com/docs/reference/api/users/#suspend-user Suspend User
       def suspend_user(user_id)
-        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/suspend")
-        JSON.parse(response.body)
+        call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/suspend")
       end
 
       # Unsuspend a user in the okta instance.
@@ -147,8 +146,7 @@ module Simpleokta
       # @return [Hash] empty hash
       # @see https://developer.okta.com/docs/reference/api/users/#unsuspend-user Unsuspend User
       def unsuspend_user(user_id)
-        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/unsuspend")
-        JSON.parse(response.body)
+        call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/unsuspend")
       end
 
       # Unlocks a user in the okta instance.
