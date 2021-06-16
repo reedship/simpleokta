@@ -4,7 +4,7 @@ require 'vcr'
 require 'simpleokta/users'
 
 RSpec.describe Simpleokta::Client::Users do
-  let(:bradens_id) {'00uxf5kx9MpPC2jpb5d6'}
+  let(:bradens_id) { '00uxf5kx9MpPC2jpb5d6' }
   let(:profile_object) do
     profile_object = {
       profile: {
@@ -68,7 +68,7 @@ RSpec.describe Simpleokta::Client::Users do
     end
     it 'returns an error hash when passing invalid parameters' do
       VCR.use_cassette('users/invalid_create_user') do
-        response = client.create_user({boop: 'bap'})
+        response = client.create_user({ boop: 'bap' })
         expect(response['errorCode']).to eq('E0000003')
         expect(response['errorSummary']).to eq('The request body was not well-formed.')
       end
@@ -86,7 +86,7 @@ RSpec.describe Simpleokta::Client::Users do
     end
     it 'returns an error hash when passing invalid parameters' do
       VCR.use_cassette('users/invalid_create_and_activate') do
-        response = client.create_and_activate_user({boop: 'bap'})
+        response = client.create_and_activate_user({ boop: 'bap' })
         expect(response['errorCode']).to eq('E0000003')
         expect(response['errorSummary']).to eq('The request body was not well-formed.')
       end
@@ -103,7 +103,7 @@ RSpec.describe Simpleokta::Client::Users do
     end
     it 'returns an error hash when passed invalid parameters' do
       VCR.use_cassette('users/invalid_create_user_in_group') do
-        response = client.create_user_in_group({boop: 'bap'}, ['00g10pnp6v3Brgwlx5d7'])
+        response = client.create_user_in_group({ boop: 'bap' }, ['00g10pnp6v3Brgwlx5d7'])
         expect(response['errorCode']).to eq('E0000003')
         expect(response['errorSummary']).to eq('The request body was not well-formed.')
       end
@@ -208,24 +208,24 @@ RSpec.describe Simpleokta::Client::Users do
     it 'returns the expected body' do
       VCR.use_cassette('users/activate_user') do
         response = client.activate_user('00u10q2zmvugkWr7d5d7', false)
-        expect(response.keys).to eq(['activationUrl','activationToken'])
+        expect(response.keys).to eq(%w[activationUrl activationToken])
       end
     end
   end
   describe '#reactivate_user' do
     it 'reactivates a user when their status is PROVISIONED' do
-        VCR.use_cassette('users/reactivate_user') do
-          response = client.reactivate_user('00u10ribsoVWUttmX5d7', false)
-          expect(response['activationToken']).not_to be(nil)
-        end
+      VCR.use_cassette('users/reactivate_user') do
+        response = client.reactivate_user('00u10ribsoVWUttmX5d7', false)
+        expect(response['activationToken']).not_to be(nil)
+      end
     end
     it 'returns an error hash when the given user is already active' do
-        VCR.use_cassette('users/reactivate_user_already_active') do
-          response = client.reactivate_user(bradens_id, false)
-          p response
+      VCR.use_cassette('users/reactivate_user_already_active') do
+        response = client.reactivate_user(bradens_id, false)
+        p response
         expect(response['errorCode']).to eq('E0000038')
         expect(response['errorSummary']).to eq('This operation is not allowed in the user\'s current status.')
-        end
+      end
     end
     it 'returns an error when passed an invalid user_id' do
       VCR.use_cassette('users/invalid_reactivate_user') do
@@ -237,7 +237,7 @@ RSpec.describe Simpleokta::Client::Users do
     it 'returns the expected body' do
       VCR.use_cassette('users/reactivate_user') do
         response = client.reactivate_user('00u10ribsoVWUttmX5d7', false)
-        expect(response.keys).to eq(['activationUrl','activationToken'])
+        expect(response.keys).to eq(%w[activationUrl activationToken])
       end
     end
   end
@@ -305,14 +305,16 @@ RSpec.describe Simpleokta::Client::Users do
   end
   describe '#unlock_user' do
     it 'unlocks a user whose status == LOCKED_OUT' do
-
+      VCR.use_cassette('users/unlock_user') do
+        response = client.unlock_user('00u10x5qqh0j0yTHK5d7')
+        expect(response.code).to eq(200)
+      end
     end
-    it 'returns a status code of 200' do
-
+    it 'user is no longer LOCKED_OUT after invoking method' do
+      VCR.use_cassette('users/unlocked_user') do
+        response = client.user('00u10x5qqh0j0yTHK5d7')
+        expect(response['status']).not_to eq('LOCKED_OUT')
+      end
     end
-    it 'sets the user status to ACTIVE' do
-
-    end
-
   end
 end

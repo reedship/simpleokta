@@ -156,8 +156,7 @@ module Simpleokta
       # @return [Hash] empty hash
       # @see https://developer.okta.com/docs/reference/api/users/#unlock-user Unlock User
       def unlock_user(user_id)
-        response = call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/unlock")
-        JSON.parse(response.body)
+        call_with_token('post', "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/unlock")
       end
 
       # List all applications a user currently has assigned to them.
