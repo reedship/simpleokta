@@ -269,7 +269,6 @@ RSpec.describe Simpleokta::Client::Users do
         expect(JSON.parse(response.body)['errorCode']).to eq('E0000007')
         expect(JSON.parse(response.body)['errorSummary']).to eq('Not found: Resource not found: fakeuserid (User)')
       end
-
     end
     it 'returns an error when user does not have a status of ACTIVE' do
       VCR.use_cassette('users/suspend_user_active') do
@@ -284,7 +283,6 @@ RSpec.describe Simpleokta::Client::Users do
         response = client.suspend_user('00u10x5qqh0j0yTHK5d7')
         expect(response.code).to eq(200)
       end
-
     end
   end
   describe '#unsuspend_user' do
@@ -297,13 +295,12 @@ RSpec.describe Simpleokta::Client::Users do
       end
     end
     it 'returns an error when passed an invalid user_id' do
-
-    end
-    it 'returns an error when user does not have a status of SUSPENDED' do
-
-    end
-    it 'returns a status code of 200' do
-
+      VCR.use_cassette('users/invalid_unsuspend_user') do
+        response = client.unsuspend_user('fakeuserid')
+        expect(response.code).to eq(404)
+        expect(JSON.parse(response.body)['errorCode']).to eq('E0000007')
+        expect(JSON.parse(response.body)['errorSummary']).to eq('Not found: Resource not found: fakeuserid (User)')
+      end
     end
   end
   describe '#unlock_user' do
