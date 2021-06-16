@@ -129,7 +129,7 @@ module Simpleokta
       def deactivate_user(user_id, send_email)
         response = call_with_token('post',
                                    "#{Constants::USER_API_BASE_PATH}/#{user_id}/lifecycle/deactivate?sendEmail=#{send_email}")
-        JSON.parse(response.body)
+        response
       end
 
       # Suspend a user in the okta instance.

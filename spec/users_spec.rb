@@ -243,15 +243,17 @@ RSpec.describe Simpleokta::Client::Users do
   end
   describe '#deactivate_user' do
     it 'deactivates a user when the given user is active' do
-
-    end
-    it 'returns a 403 error code when the given user is already deactivated' do
-
+      VCR.use_cassette('users/deactivate_user') do
+        response = client.deactivate_user('00u10ribsoVWUttmX5d7', false)
+        expect(response.code).to eq(200)
+      end
     end
     it 'returns an error when passed an invalid user_id' do
-
-    end
-    it 'returns a status code of 200' do
+      VCR.use_cassette('users/invalid_deactivate_user') do
+        response = client.deactivate_user('fakeuserid', false)
+        expect(response['errorCode']).to eq('E0000007')
+        expect(response['errorSummary']).to eq('Not found: Resource not found: fakeuserid (User)')
+      end
 
     end
   end
