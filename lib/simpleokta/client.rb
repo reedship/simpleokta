@@ -7,7 +7,6 @@ require 'simpleokta/apps'
 require 'simpleokta/auth_servers'
 require 'simpleokta/groups'
 require 'simpleokta/constants'
-require 'simpleokta/system_logs'
 require 'simpleokta/users'
 
 module Simpleokta
@@ -16,7 +15,6 @@ module Simpleokta
     include AuthServers
     include Groups
     include Constants
-    include SystemLogs
     include Users
 
     attr_accessor :api_token, :base_api_url
@@ -37,8 +35,6 @@ module Simpleokta
     #   Each request may require a different body schema.
     def call_with_token(action, url, body = {})
       uri = @base_api_url + url
-      p uri
-      p action
       @http
         .headers(accept: 'application/json', content: 'application/json')
         .auth("SSWS #{@api_token}")

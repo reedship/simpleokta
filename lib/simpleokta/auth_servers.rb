@@ -48,10 +48,11 @@ module Simpleokta
       # @return [Hash<Authorization Server Object>]
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#update-authorization-server Update Authorization Server
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#authorization-server-object Authorization Server Object
-      def update_auth_server(auth_server_id, _auth_server_data)
+      def update_auth_server(auth_server_id, auth_server_data)
         response = call_with_token(
           'put',
-          "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}"
+          "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}",
+          auth_server_data
         )
         JSON.parse(response.body)
       end
@@ -61,11 +62,10 @@ module Simpleokta
       # @return 204 No Content
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#delete-authorization-server Delete Authorization Server
       def delete_auth_server(auth_server_id)
-        response = call_with_token(
+        call_with_token(
           'delete',
           "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}"
         )
-        JSON.parse(response.body)
       end
 
       # Activate an Authorization Server in the okta instance.
@@ -73,11 +73,10 @@ module Simpleokta
       # @return 204 No Content
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#activate-authorization-server Activate Authorization Server
       def activate_auth_server(auth_server_id)
-        response = call_with_token(
+        call_with_token(
           'post',
           "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}/lifecycle/activate"
         )
-        JSON.parse(response.body)
       end
 
       # Deactivate an Authorization Server in the okta instance.
@@ -85,11 +84,10 @@ module Simpleokta
       # @return 204 No Content
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#activate-authorization-server Deactivate Authorization Server
       def deactivate_auth_server(auth_server_id)
-        response = call_with_token(
+        call_with_token(
           'post',
           "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}/lifecycle/deactivate"
         )
-        JSON.parse(response.body)
       end
 
       # POLICY METHODS
@@ -158,11 +156,10 @@ module Simpleokta
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#policy-object Policy Object
       # @see https://developer.okta.com/docs/reference/api/authorization-servers/#delete-a-policy Delete Policy
       def delete_policy(auth_server_id, policy_id)
-        response = call_with_token(
+        call_with_token(
           'delete',
           "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}/policies/#{policy_id}"
         )
-        JSON.parse(response.body)
       end
     end
 
@@ -238,11 +235,10 @@ module Simpleokta
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#rule-object Rule object
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#delete-a-policy-rule Delete Policy Rule
     def delete_rule(auth_server_id, policy_id, rule_id)
-      response = call_with_token(
+      call_with_token(
         'delete',
         "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}/policies/#{policy_id}/rules/#{rule_id}"
       )
-      JSON.parse(response.body)
     end
 
     # SCOPES METHODS
@@ -312,11 +308,10 @@ module Simpleokta
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#scope-object Scope Object
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#delete-a-scope Delete Scope
     def delete_scope(auth_server_id, scope_id)
-      response = call_with_token(
+      call_with_token(
         'delete',
         "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}/scopes/#{scope_id}"
       )
-      JSON.parse(response.body)
     end
 
     # CLAIMS METHODS
@@ -386,11 +381,10 @@ module Simpleokta
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#claim-object Claim Object
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#delete-a-claim Delete Claim
     def delete_claim(auth_server_id, claim_id)
-      response = call_with_token(
+      call_with_token(
         'delete',
         "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}/claims/#{claim_id}"
       )
-      JSON.parse(response.body)
     end
 
     # KEY STORE OPERATIONS
@@ -484,7 +478,7 @@ module Simpleokta
     # @param token_id [String] the unique id of the refresh token
     # @return 204 No Content
     # @see https://developer.okta.com/docs/reference/api/authorization-servers/#revoke-refresh-token Revoke Refresh Token
-    def revoke_refresh_tokens(auth_server_id, client_id)
+    def revoke_refresh_token(auth_server_id, client_id, token_id)
       response = call_with_token(
         'delete',
         "#{Constants::AUTH_SERVER_API_BASE_PATH}/#{auth_server_id}/clients/#{client_id}/tokens/#{token_id}"
