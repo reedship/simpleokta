@@ -103,18 +103,59 @@ RSpec.describe Simpleokta::Client::AuthServers do
       end
     end
     describe '#activate_auth_server' do
-
+      it 'returns a 204 status code' do
+        VCR.use_cassette('auth_servers/activate_auth_server') do
+          response = client.activate_auth_server('aus1126khtc7OkUSC5d7')
+          expect(reponse.code).to eq(204)
+        end
+      end
+      it 'activates an authorization server' do
+        VCR.use_cassette('auth_servers/active_after_activate_auth_server') do
+          response = client.activate_auth_server('aus1126khtc7OkUSC5d7')
+          auth_server = client.auth_server('aus1126khtc7OkUSC5d7')
+          expect(response.code).to eq(204)
+          expect(auth_server['status']).to eq('ACTIVE')
+        end
+      end
     end
     describe '#deactivate_auth_server' do
-
+      it 'returns a 204 status code' do
+        VCR.use_cassette('auth_servers/deactivate_auth_server') do
+          response = client.activate_auth_server('aus1126khtc7OkUSC5d7')
+          expect(reponse.code).to eq(204)
+        end
+      end
+      it 'deactivates an authorization server' do
+        VCR.use_cassette('auth_servers/inactive_after_deactivate_auth_server') do
+          response = client.deactivate_auth_server('aus1126khtc7OkUSC5d7')
+          auth_server = client.auth_server('aus1126khtc7OkUSC5d7')
+          expect(response.code).to eq(204)
+          expect(auth_server['status']).to eq('INACTIVE')
+        end
+      end
     end
   end
 
   describe 'POLICY METHODS' do
-    describe '#policy' do
-
-    end
     describe '#policies' do
+      it 'returns an array' do
+        VCR.use_cassette('auth_servers/policies') do
+          response = client.policies('aus1126khtc7OkUSC5d7')
+          expect(response.class).to be(Array)
+          p response
+        end
+      end
+    end
+    describe '#policy' do
+      it 'returns a hash' do
+
+      end
+      it 'returns an error when passed an invalid policy_id' do
+
+      end
+      it 'returns an error when passed an invalid auth_server_id' do
+
+      end
 
     end
     describe '#create_policy' do
