@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://dev-47339917.okta.com/api/v1/groups
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      Accept:
+      - application/json
+      Content:
+      - application/json
+      Authorization:
+      - SSWS <<ACCESS_TOKEN>>
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=UTF-8
+      Host:
+      - dev-47339917.okta.com
+      User-Agent:
+      - http.rb/4.4.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 21 Jun 2021 20:12:59 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Server:
+      - nginx
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Vary:
+      - Accept-Encoding
+      X-Okta-Request-Id:
+      - YNDyy-ygIm5donc9NiZlbQAADBU
+      X-Xss-Protection:
+      - '0'
+      P3p:
+      - CP="HONK"
+      X-Rate-Limit-Limit:
+      - '100'
+      X-Rate-Limit-Remaining:
+      - '99'
+      X-Rate-Limit-Reset:
+      - '1624306439'
+      Cache-Control:
+      - no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Content-Security-Policy:
+      - 'default-src ''self'' dev-47339917.okta.com *.oktacdn.com; connect-src ''self''
+        dev-47339917.okta.com dev-47339917-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        https://oinmanager.okta.com data:; script-src ''unsafe-inline'' ''unsafe-eval''
+        ''self'' dev-47339917.okta.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' dev-47339917.okta.com *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
+        frame-src ''self'' dev-47339917.okta.com dev-47339917-admin.okta.com login.okta.com;
+        img-src ''self'' dev-47339917.okta.com *.oktacdn.com *.tiles.mapbox.com *.mapbox.com
+        app.pendo.io data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob:; font-src ''self'' dev-47339917.okta.com data: *.oktacdn.com fonts.gstatic.com'
+      Expect-Ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      Link:
+      - <https://dev-47339917.okta.com/api/v1/groups?limit=10000>; rel="self"
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Set-Cookie:
+      - JSESSIONID=2BDDC05E6258D1030225FB592A4B5947; Path=/; Secure; HttpOnly
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+    body:
+      encoding: UTF-8
+      string: '[{"id":"00gxf5kry6skrJf095d6","created":"2021-06-10T15:04:42.000Z","lastUpdated":"2021-06-10T15:04:42.000Z","lastMembershipUpdated":"2021-06-16T14:37:26.000Z","objectClass":["okta:user_group"],"type":"BUILT_IN","profile":{"name":"Everyone","description":"All
+        users in your organization"},"_links":{"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/groups/odyssey/okta-medium.1a5ebe44c4244fb796c235d86b47e3bb.png","type":"image/png"},{"name":"large","href":"https://ok12static.oktacdn.com/assets/img/logos/groups/odyssey/okta-large.d9cfbd8a00a4feac1aa5612ba02e99c0.png","type":"image/png"}],"users":{"href":"https://dev-47339917.okta.com/api/v1/groups/00gxf5kry6skrJf095d6/users"},"apps":{"href":"https://dev-47339917.okta.com/api/v1/groups/00gxf5kry6skrJf095d6/apps"}}},{"id":"00g10pnp6v3Brgwlx5d7","created":"2021-06-15T19:22:34.000Z","lastUpdated":"2021-06-15T19:22:34.000Z","lastMembershipUpdated":"2021-06-15T21:14:52.000Z","objectClass":["okta:user_group"],"type":"OKTA_GROUP","profile":{"name":"Working
+        Group","description":"a working group for testing simpleokta"},"_links":{"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/groups/odyssey/okta-medium.1a5ebe44c4244fb796c235d86b47e3bb.png","type":"image/png"},{"name":"large","href":"https://ok12static.oktacdn.com/assets/img/logos/groups/odyssey/okta-large.d9cfbd8a00a4feac1aa5612ba02e99c0.png","type":"image/png"}],"users":{"href":"https://dev-47339917.okta.com/api/v1/groups/00g10pnp6v3Brgwlx5d7/users"},"apps":{"href":"https://dev-47339917.okta.com/api/v1/groups/00g10pnp6v3Brgwlx5d7/apps"}}}]'
+  recorded_at: Mon, 21 Jun 2021 20:12:57 GMT
+recorded_with: VCR 6.0.0

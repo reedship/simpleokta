@@ -27,14 +27,16 @@ module Simpleokta
       # @return [Array<Group Object>]
       # @see https://developer.okta.com/docs/reference/api/apps/#application-object Application Object
       def apps_assigned_to_group(group_id)
-        response = call_with_token('get', "#{Constants::APP_API_BASE_PATH}/?filter=group.id+eq+\"#{group_id}\"")
+        response = call_with_token('get', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}/apps")
         JSON.parse(response.body)
       end
 
       # Set an application to be automatically assigned to members of a group
       # @param app_id [String] the unique id of the application
       # @param group_id [String] the unique identifier of the group
-      # @return
+      # @return [Hash<Application Group Object>]
+      # @see https://developer.okta.com/docs/reference/api/apps/#assign-group-to-application Assign Group to Application
+      # @see https://developer.okta.com/docs/reference/api/apps/#application-key-credential-object Application Group Object
       def assign_group_to_application(app_id, group_id)
         response = call_with_token('put', "#{Constants::APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
         JSON.parse(response.body)
@@ -47,8 +49,7 @@ module Simpleokta
       # @see https://developer.okta.com/docs/reference/api/apps/#response-example-34 Group Assignment Response
       # @see https://developer.okta.com/docs/reference/api/apps/#assign-group-to-application Assign Group To Application
       def remove_group_from_application(app_id, group_id)
-        response = call_with_token('delete', "#{Constants::APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
-        "Groud with id: #{group_id} has been removed from application with id: #{app_id}"
+        call_with_token('delete', "#{Constants::APP_API_BASE_PATH}/#{app_id}/groups/#{group_id}")
       end
 
       # Returns an application group assignment
@@ -78,8 +79,7 @@ module Simpleokta
       # @see https://developer.okta.com/docs/reference/api/apps/#application-object Application Object
       # @see https://developer.okta.com/docs/reference/api/groups/#remove-group Remove Group
       def remove_group(group_id)
-        response = call_with_token('delete', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}")
-        JSON.parse(response.body)
+        call_with_token('delete', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}")
       end
 
       # Get all members assigned to a group
