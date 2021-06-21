@@ -30,5 +30,4 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   # Gem Dependencies
   spec.add_dependency('http')
-  spec.add_dependency('rack')
 end
