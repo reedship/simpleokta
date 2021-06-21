@@ -75,7 +75,6 @@ RSpec.describe Simpleokta::Client::Groups do
       it 'returns a 204 status code when passed valid ids' do
         VCR.use_cassette('groups/remove_group_from_app') do
           response = client.remove_group_from_application('0oayt04y5o7ecjjU05d6', working_group_id)
-          p response
           expect(response.code).to eq(204)
         end
       end
@@ -154,18 +153,21 @@ RSpec.describe Simpleokta::Client::Groups do
     describe '#group_members' do
       it 'returns an array of User objects when passed a valid group id' do
         VCR.use_cassette('groups/group_members') do
-
+          response = client.group_members(working_group_id)
+          expect(response.class).to eq(Array)
         end
       end
       it 'returns an error when passed an invalid group id' do
         VCR.use_cassette('groups/invalid_group_members') do
-
+          response = client.group_members('invalidid')
+          expect(response['errorCode']).to eq('E0000007')
+          expect(response['errorSummary']).to eq('Not found: Resource not found: invalidid (UserGroup)')
         end
       end
     end
     describe '#add_user_to_group' do
-      it 'returns a 204 when pased a valid group id' do
-        VCR.use_cassette('groups/add_user_togroup') do
+      it 'returns a user object when pased a valid group id' do
+        VCR.use_cassette('groups/add_user_to_group') do
 
         end
       end

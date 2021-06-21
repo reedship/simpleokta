@@ -222,7 +222,6 @@ RSpec.describe Simpleokta::Client::Users do
     it 'returns an error hash when the given user is already active' do
       VCR.use_cassette('users/reactivate_user_already_active') do
         response = client.reactivate_user(bradens_id, false)
-        p response
         expect(response['errorCode']).to eq('E0000038')
         expect(response['errorSummary']).to eq('This operation is not allowed in the user\'s current status.')
       end
