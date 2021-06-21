@@ -35,7 +35,6 @@ module Simpleokta
     #   Each request may require a different body schema.
     def call_with_token(action, url, body = {})
       uri = @base_api_url + url
-      p uri
       @http
         .headers(accept: 'application/json', content: 'application/json')
         .auth("SSWS #{@api_token}")

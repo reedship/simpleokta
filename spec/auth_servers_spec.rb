@@ -106,7 +106,7 @@ RSpec.describe Simpleokta::Client::AuthServers do
       it 'returns a 204 status code' do
         VCR.use_cassette('auth_servers/activate_auth_server') do
           response = client.activate_auth_server('aus1126khtc7OkUSC5d7')
-          expect(reponse.code).to eq(204)
+          expect(response.code).to eq(204)
         end
       end
       it 'activates an authorization server' do
@@ -122,7 +122,7 @@ RSpec.describe Simpleokta::Client::AuthServers do
       it 'returns a 204 status code' do
         VCR.use_cassette('auth_servers/deactivate_auth_server') do
           response = client.activate_auth_server('aus1126khtc7OkUSC5d7')
-          expect(reponse.code).to eq(204)
+          expect(response.code).to eq(204)
         end
       end
       it 'deactivates an authorization server' do
