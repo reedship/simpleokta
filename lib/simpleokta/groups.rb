@@ -97,8 +97,7 @@ module Simpleokta
       # @return 204 No Content
       # @see https://developer.okta.com/docs/reference/api/groups/#add-user-to-group
       def add_user_to_group(group_id, user_id)
-        response = call_with_token('put', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}/users/#{user_id}")
-        JSON.parse(response.body)
+        call_with_token('put', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}/users/#{user_id}")
       end
 
       # Remove a user from a group
@@ -107,75 +106,7 @@ module Simpleokta
       # @return 204 No Content
       # @see https://developer.okta.com/docs/reference/api/groups/#remove-user-from-group Add User To Group
       def remove_user_from_group(group_id, user_id)
-        response = call_with_token('delete', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}/users/#{user_id}")
-        JSON.parse(response.body)
-      end
-
-      # GROUP RULE METHODS
-
-      # Create a new group rule
-      # @param group_id [String] the unique identifier of the group
-      # @param rule_data [Hash<Rule Object>] the data for the rule
-      # @return [Hash<RuleObject>]
-      # @see https://developer.okta.com/docs/reference/api/groups/#create-group-rule Create Group Rule
-      # @see  https://developer.okta.com/docs/reference/api/groups/#rule-object Rule Object
-      def create_group_rule(group_id, _rule_data)
-        response = call_with_token('post', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}/users/#{user_id}")
-        JSON.parse(response.body)
-      end
-
-      # Update a group rule
-      # @param group_id [String] the unique identifier of the group
-      # @param rule_id [String] the id for the rule
-      # @return [Hash<RoleObject>]
-      # @see https://developer.okta.com/docs/reference/api/groups/#update-group-rule Update Group Rule
-      def update_group_rule(group_id, _rule_data)
-        response = call_with_token('put', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}/users/#{user_id}")
-        JSON.parse(response.body)
-      end
-
-      # List all group rules in the okta instance
-      # @return [Array<RuleObject>]
-      # @see https://developer.okta.com/docs/reference/api/groups/#list-group-rules List Group Rules
-      def group_rules
-        response = call_with_token('get' "#{Constants::GROUP_API_BASE_PATH}/rules")
-        JSON.parse(response.body)
-      end
-
-      # List a specific group rule in the okta instance
-      # @param rule_id [String] the id for the rule
-      # @return  [Hash<Rule Object>]
-      # @see https://developer.okta.com/docs/reference/api/groups/#get-group-rule Get Group Rule
-      def group_rule(rule_id)
-        response = call_with_token('get' "#{Constants::GROUP_API_BASE_PATH}/rules/#{rule_id}")
-        JSON.parse(response.body)
-      end
-
-      # Delete a specific group rule in the okta instance
-      # @param rule_id [String] the id for the rule
-      # @return 202 Accepted
-      # @see https://developer.okta.com/docs/reference/api/groups/#delete-a-group-rule Delete Group Rule
-      def delete_group_rule(rule_id)
-        response = call_with_token('delete' "#{Constants::GROUP_API_BASE_PATH}/rules/#{rule_id}")
-        JSON.parse(response.body)
-      end
-
-      # Activate a group rule
-      # @param rule_id [String] the unique id of the rule
-      # @return 204 No Content
-      # @see https://developer.okta.com/docs/reference/api/groups/#activate-a-group-rule Activate a Group Rule
-      def activate_group_rule(rule_id)
-        response = call_with_token('post' "#{Constants::GROUP_API_BASE_PATH}/rules/#{rule_id}/lifecycle/activate")
-        JSON.parse(response.body)
-      end
-
-      # Activate a group rule
-      # @param rule_id [String] the unique id of the rule
-      # @return 204 No Content
-      # @see https://developer.okta.com/docs/reference/api/groups/#deactivate-a-group-rule Deactivate a Group Rule
-      def deactivate_group_rule(rule_id)
-        response = call_with_token('post' "#{Constants::GROUP_API_BASE_PATH}/rules/#{rule_id}/lifecycle/deactivate")
-        JSON.parse(response.body)
+        call_with_token('delete', "#{Constants::GROUP_API_BASE_PATH}/#{group_id}/users/#{user_id}")
       end
     end
   end

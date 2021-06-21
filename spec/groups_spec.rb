@@ -4,10 +4,10 @@ require 'vcr'
 require 'simpleokta/groups'
 
 RSpec.describe Simpleokta::Client::Groups do
+  let(:working_group_id) {
+    '00g10pnp6v3Brgwlx5d7'
+  }
   describe 'GROUP METHODS' do
-    let(:working_group_id) {
-      '00g10pnp6v3Brgwlx5d7'
-    }
     describe '#groups' do
       it 'returns an array' do
         VCR.use_cassette('groups/groups') do
@@ -166,110 +166,46 @@ RSpec.describe Simpleokta::Client::Groups do
       end
     end
     describe '#add_user_to_group' do
-      it 'returns a user object when pased a valid group id' do
+      it 'returns a 204 status code when pased a valid group id' do
         VCR.use_cassette('groups/add_user_to_group') do
-
+          response = client.add_user_to_group(working_group_id, '00u10ribsoVWUttmX5d7')
+          expect(response.code).to eq(204)
         end
       end
       it 'returns an error when passed an invalid group id' do
         VCR.use_cassette('groups/invalid_add_user_to_group') do
-
+          response = client.add_user_to_group('invalidid', '00u10ribsoVWUttmX5d7')
+          expect(JSON.parse(response)['errorCode']).to eq('E0000007')
+          expect(JSON.parse(response)['errorSummary']).to eq('Not found: Resource not found: invalidid (UserGroup)')
         end
       end
       it 'returns an error when passed an invalid user id' do
-        VCR.use_cassette('groups/invalid_app_user_to_group') do
-
+        VCR.use_cassette('groups/invalid_user_app_user_to_group') do
+          response = client.add_user_to_group(working_group_id, 'invalidid')
+          expect(JSON.parse(response)['errorCode']).to eq('E0000007')
+          expect(JSON.parse(response)['errorSummary']).to eq('Not found: Resource not found: invalidid (User)')
         end
       end
     end
     describe '#remove_user_from_group' do
       it 'returns a 204 when pased a valid group id' do
         VCR.use_cassette('groups/remove_user_from_group') do
-
+          response = client.remove_user_from_group(working_group_id, '00u10ribsoVWUttmX5d7')
+          expect(response.code).to eq(204)
         end
       end
       it 'returns an error when passed an invalid group id' do
         VCR.use_cassette('groups/invalid_remove_user_from_group') do
-
+          response = client.remove_user_from_group(working_group_id, 'invalidid')
+          expect(JSON.parse(response)['errorCode']).to eq('E0000007')
+          expect(JSON.parse(response)['errorSummary']).to eq('Not found: Resource not found: invalidid (User)')
         end
       end
       it 'returns an error when passed an invalid user id' do
-        VCR.use_cassette('groups/invalid_remove_user_from_group') do
-
-        end
-      end
-    end
-  end
-  describe 'GROUP RULE METHODS' do
-    describe '#group_rules' do
-      it 'returns an array of rule objects' do
-        VCR.use_cassette('groups/group_rules') do
-
-        end
-      end
-    end
-    describe '#group_rule' do
-      it 'returns a hash when passed a valid group rule id' do
-        VCR.use_cassette('groups/group_rule') do
-
-        end
-      end
-      it 'returns an error when passed an invalid group rule id' do
-        VCR.use_cassette('groups/invalid_group_rule') do
-
-        end
-      end
-    end
-    describe '#create_group_rule' do
-      it 'returns the created group rule when passed valid data' do
-        VCR.use_cassette('groups/create_group_rule') do
-
-        end
-      end
-      it 'returns an error when passed invalid data' do
-        VCR.use_cassette('groups/invalid_create_group_rule') do
-
-        end
-      end
-    end
-    describe '#delete_group_rule' do
-      it 'returns a 204 when passed a valid group rule id' do
-        VCR.use_cassette('groups/delete_group_rule') do
-
-        end
-      end
-      it 'returns an error when passed an invalid group rule id' do
-        VCR.use_cassette('groups/invalid_delete_group_rule') do
-
-        end
-      end
-      it 'deletes the rule when passed a valid group rule id' do
-        VCR.use_cassette('groups/invalid_delete_group_rule') do
-
-        end
-      end
-    end
-    describe '#activate_group_rule' do
-      it 'activates the group rule when passed a valid group rule id' do
-        VCR.use_cassette('groups/activate_group_rule') do
-
-        end
-      end
-      it 'returns an error when passed an invalid group rule id' do
-        VCR.use_cassette('groups/invalid_activate_group_rule') do
-
-        end
-      end
-    end
-    describe '#deactivate_group_rule' do
-      it 'activates the group rule when passed a valid group rule id' do
-        VCR.use_cassette('groups/deactivate_group_rule') do
-
-        end
-      end
-      it 'returns an error when passed an invalid group rule id' do
-        VCR.use_cassette('groups/invalid_deactivate_group_rule') do
-
+        VCR.use_cassette('groups/invalid_user_remove_user_from_group') do
+          response = client.remove_user_from_group('invalidid', '00u10ribsoVWUttmX5d7')
+          expect(JSON.parse(response)['errorCode']).to eq('E0000007')
+          expect(JSON.parse(response)['errorSummary']).to eq('Not found: Resource not found: invalidid (UserGroup)')
         end
       end
     end
