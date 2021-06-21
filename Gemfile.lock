@@ -1,9 +1,8 @@
 PATH
   remote: .
   specs:
-    simpleokta (0.1.0)
+    simpleokta (0.1.5)
       http
-      rack
 
 GEM
   remote: https://rubygems.org/
