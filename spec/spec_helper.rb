@@ -42,7 +42,10 @@ end
 
 module TestingClient
   extend RSpec::SharedContext
-  let(:client) { Simpleokta::Client.new({ api_token: ENV['API_TOKEN'], base_api_url: ENV['BASE_API_URL'] }) }
+  let(:client) { Simpleokta::Client.new({
+    api_token: ENV['API_TOKEN'] || '1234-5678',
+    base_api_url: ENV['BASE_API_URL'] || "https://example.com"})
+  }
 end
 
 RSpec.configure do |config|
