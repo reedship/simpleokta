@@ -139,10 +139,9 @@ RSpec.describe Simpleokta::Client::AuthServers do
   describe 'POLICY METHODS' do
     describe '#policies' do
       it 'returns an array' do
-        VCR.use_cassette('auth_servers/policies') do
+        VCR.use_cassette('auth_servers/policies', match_requests_on: [:path]) do
           response = client.policies('aus1126khtc7OkUSC5d7')
           expect(response.class).to be(Array)
-          p response
         end
       end
     end
