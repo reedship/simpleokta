@@ -186,7 +186,7 @@ RSpec.describe Simpleokta::Client::Users do
   end
   describe '#activate_user' do
     it 'activates a user when the given user is deactivated', match_requests_on: [:path] do
-      VCR.use_cassette('users/activate_user') do
+      VCR.use_cassette('users/activate_user', match_requests_on: [:path]) do
         response = client.activate_user('00u10q2zmvugkWr7d5d7', false)
         expect(response).not_to be(nil)
       end

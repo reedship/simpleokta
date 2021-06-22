@@ -79,7 +79,7 @@ RSpec.describe Simpleokta::Client::AuthServers do
         end
       end
       it 'returns an error when passed an invalid authorization server object' do
-        VCR.use_cassette('auth_servers/invalid_update_auth_server') do
+        VCR.use_cassette('auth_servers/invalid_update_auth_server', match_requests_on: [:path]) do
           response = client.update_auth_server('aus110xphkcEtyhLv5d7', invalid_auth_server_object)
           expect(response['errorCode']).to eq('E0000001')
           expect(response['errorSummary']).to eq('Api validation failed: audiences')
