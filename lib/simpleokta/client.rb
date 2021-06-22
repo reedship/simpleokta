@@ -22,8 +22,8 @@ module Simpleokta
     # Initialize using passed in config hash
     # @param config [Hash]
     def initialize(config)
-      @api_token = config[:api_token]
-      @base_api_url = config[:base_api_url]
+      @api_token = config[:api_token] || ""
+      @base_api_url = config[:base_api_url] || ""
       @http ||= HTTP::Client.new
     end
 
