@@ -21,7 +21,7 @@ RSpec.describe Simpleokta::Client::AuthServers do
   describe 'AUTH SERVER METHODS' do
     describe '#auth_servers' do
       it 'returns a list of auth servers' do
-        VCR.use_cassette('auth_servers/auth_servers') do
+        VCR.use_cassette('auth_servers/auth_servers', match_requests_on: [:path]) do
           response = client.auth_servers
           expect(response.class).to be(Array)
           expect(response).not_to be_nil
@@ -30,7 +30,7 @@ RSpec.describe Simpleokta::Client::AuthServers do
     end
     describe '#auth_server' do
       it 'returns an auth server when passed a valid id' do
-        VCR.use_cassette('auth_servers/auth_server') do
+        VCR.use_cassette('auth_servers/auth_server', match_requests_on: [:path]) do
           response = client.auth_server('ausxf5ktkSSCqMgqt5d6')
           expect(response['id']).to eq('ausxf5ktkSSCqMgqt5d6')
           expect(response['name']).to eq('default')
@@ -38,7 +38,7 @@ RSpec.describe Simpleokta::Client::AuthServers do
         end
       end
       it 'returns an error when passed an invalid id' do
-        VCR.use_cassette('auth_servers/invalid_auth_server') do
+        VCR.use_cassette('auth_servers/invalid_auth_server', match_requests_on: [:path]) do
           response = client.auth_server('fakeuserid')
           expect(response['errorCode']).to eq('E0000007')
           expect(response['errorSummary']).to eq('Not found: Resource not found: fakeuserid (AuthorizationServer)')
@@ -47,14 +47,14 @@ RSpec.describe Simpleokta::Client::AuthServers do
     end
     describe '#create_auth_server' do
       it 'creates an auth server when passed a valid authorization server object' do
-        VCR.use_cassette('auth_servers/create_auth_server') do
+        VCR.use_cassette('auth_servers/create_auth_server', match_requests_on: [:path]) do
           response = client.create_auth_server(auth_server_object)
           expect(response['id']).to eq('aus110xphkcEtyhLv5d7')
           expect(response['name']).to eq('New Authorization Server')
         end
       end
       it 'returns an error when passed an invalid authorization server object' do
-        VCR.use_cassette('auth_servers/invalid_create_auth_server') do
+        VCR.use_cassette('auth_servers/invalid_create_auth_server', match_requests_on: [:path]) do
           response = client.create_auth_server(invalid_auth_server_object)
           expect(response['errorCode']).to eq('E0000001')
           expect(response['errorSummary']).to eq('Api validation failed: audiences')
@@ -63,7 +63,7 @@ RSpec.describe Simpleokta::Client::AuthServers do
     end
     describe '#update_auth_server' do
       it 'updates an auth server when passed a valid authorization server object' do
-        VCR.use_cassette('auth_servers/update_auth_server') do
+        VCR.use_cassette('auth_servers/update_auth_server', match_requests_on: [:path]) do
           new_data = {
             name: "New Updated Authorization Server Part Dos",
             description: "Authorization Server New Description: Fancy!",
@@ -88,13 +88,13 @@ RSpec.describe Simpleokta::Client::AuthServers do
     end
     describe '#delete_auth_server' do
       it 'returns a 204 status code' do
-        VCR.use_cassette('auth_servers/delete_auth_server') do
+        VCR.use_cassette('auth_servers/delete_auth_server', match_requests_on: [:path]) do
           response = client.delete_auth_server('aus110xphkcEtyhLv5d7')
           expect(response.code).to eq(204)
         end
       end
       it 'returns an error when passed an invalid id' do
-        VCR.use_cassette('auth_servers/invalid_delete_auth_server') do
+        VCR.use_cassette('auth_servers/invalid_delete_auth_server', match_requests_on: [:path]) do
           response = client.delete_auth_server('fakeuserid')
           expect(response.code).to eq(404)
           expect(JSON.parse(response)['errorCode']).to eq('E0000007')
@@ -104,13 +104,13 @@ RSpec.describe Simpleokta::Client::AuthServers do
     end
     describe '#activate_auth_server' do
       it 'returns a 204 status code' do
-        VCR.use_cassette('auth_servers/activate_auth_server') do
+        VCR.use_cassette('auth_servers/activate_auth_server', match_requests_on: [:path]) do
           response = client.activate_auth_server('aus1126khtc7OkUSC5d7')
           expect(response.code).to eq(204)
         end
       end
       it 'activates an authorization server' do
-        VCR.use_cassette('auth_servers/active_after_activate_auth_server') do
+        VCR.use_cassette('auth_servers/active_after_activate_auth_server', match_requests_on: [:path]) do
           response = client.activate_auth_server('aus1126khtc7OkUSC5d7')
           auth_server = client.auth_server('aus1126khtc7OkUSC5d7')
           expect(response.code).to eq(204)
@@ -120,13 +120,13 @@ RSpec.describe Simpleokta::Client::AuthServers do
     end
     describe '#deactivate_auth_server' do
       it 'returns a 204 status code' do
-        VCR.use_cassette('auth_servers/deactivate_auth_server') do
+        VCR.use_cassette('auth_servers/deactivate_auth_server', match_requests_on: [:path]) do
           response = client.activate_auth_server('aus1126khtc7OkUSC5d7')
           expect(response.code).to eq(204)
         end
       end
       it 'deactivates an authorization server' do
-        VCR.use_cassette('auth_servers/inactive_after_deactivate_auth_server') do
+        VCR.use_cassette('auth_servers/inactive_after_deactivate_auth_server', match_requests_on: [:path]) do
           response = client.deactivate_auth_server('aus1126khtc7OkUSC5d7')
           auth_server = client.auth_server('aus1126khtc7OkUSC5d7')
           expect(response.code).to eq(204)
