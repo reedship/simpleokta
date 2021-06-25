@@ -1,7 +1,7 @@
 # Simpleokta
 [![Gem Version](https://badge.fury.io/rb/simpleokta.svg)](https://badge.fury.io/rb/simpleokta)
 
-This gem provides easy access to multiple common Okta API calls. Please see the [documentation on rubydoc](https://www.rubydoc.info/github/bradenshipley/simpleokta/main) for more information on what methods are available.
+This gem provides easy access to multiple common Okta API calls. Please see the [documentation on rubydoc](https://rubydoc.info/github/bradenshipley/simpleokta/main/Simpleokta/Client) for more information on what methods are available.
 
 ## Installation
 
